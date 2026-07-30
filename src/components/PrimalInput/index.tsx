@@ -70,17 +70,14 @@ export const PrimalInput = ({
 
 // ─── Compositions ─────────────────────────────────────────────────────────────
 
-/** Campo de busca — type search com placeholder padrão */
 export const SearchInput = (props: Partial<PrimalInputProps>) => (
-  <PrimalInput type="search" placeholder="Buscar..." {...props} />
+  <PrimalInput type="search" placeholder="..." {...props} />
 )
 
-/** Campo de senha — type password com placeholder padrão */
 export const PasswordInput = (props: Partial<PrimalInputProps>) => (
-  <PrimalInput type="password" placeholder="Senha" {...props} />
+  <PrimalInput type="password" placeholder="..." {...props} />
 )
 
-/** Campo de e-mail — type email com placeholder padrão */
 export const EmailInput = (props: Partial<PrimalInputProps>) => (
-  <PrimalInput type="email" placeholder="seu@email.com" {...props} />
+  <PrimalInput type="email" placeholder="..." {...props} />
 )
