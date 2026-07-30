@@ -1,7 +1,3 @@
-// components/PrimalInput/styles.ts
-// Define todos os objetos de estilo do PrimalInput.
-// Unidades: rem para tudo. Exceção: border e outline usam px.
-
 import type React from 'react'
 import { tokens } from '../../tokens'
 
@@ -33,7 +29,6 @@ export const inputStyles = {
     backgroundColor: tokens.colors.surface,
     color:        tokens.colors.textPrimary,
     outline:      'none',
-    transition:   'border-color 0.2s ease, outline 0.2s ease',
     width:        '100%',
   } as React.CSSProperties,
 
@@ -55,15 +50,15 @@ export const inputStyles = {
   },
 
   states: {
-    // Hover suaviza a borda para dar feedback visual antes do foco
+    // Hover
     hovered: {
-      borderColor: tokens.colors.textTertiary,
+      borderColor: tokens.colors.border,
+      cursor: 'pointer'
     } as React.CSSProperties,
 
-    // Foco destaca a borda e adiciona anel de acessibilidade
+    // Foco
     focused: {
-      borderColor:   tokens.colors.blue,
-      outline:       `2px solid ${tokens.colors.blue}`,
+      borderColor:   tokens.colors.border,
       outlineOffset: '1px',
     } as React.CSSProperties,
 

@@ -1,8 +1,8 @@
 export const colors = {
-  // --- ACTION COLORS ---
-  blue:  '#007AFF', 
-  red:   '#FF3B30',
-  green: '#34C759',
+  // --- COLORS ---
+  blue:  '#305CDE', 
+  red:   '#CF0000 ',
+  green: '#44CC83',
   orange: '#FF9500', 
 
   // --- Background ---
@@ -13,11 +13,11 @@ export const colors = {
   // --- Text ---
   textPrimary:   '#000000', 
   textSecondary: '#3C3C43', 
-  textTertiary:  '#8E8E93', 
+  textTertiary:  '#9e9e9e', 
   textOnColor:   '#FFFFFF', 
 
   // --- Borders and Separators ---
-  border:    '#C6C6C8', 
+  border:    '#c7c7c7', 
   separator: '#E5E5EA', 
 
   // --- Disabled state ---

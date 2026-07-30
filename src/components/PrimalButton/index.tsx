@@ -59,17 +59,14 @@ export const PrimalButton = ({
 
 // ─── Compositions ─────────────────────────────────────────────────────────────
 
-/** Ação destrutiva — usa variante danger */
 export const DeleteButton = (props: Partial<PrimalButtonProps>) => (
   <PrimalButton variant="danger" {...props} />
 )
 
-/** Ação de edição — usa variante primary */
 export const UpdateButton = (props: Partial<PrimalButtonProps>) => (
   <PrimalButton variant="primary" {...props} />
 )
 
-/** Ação de criação — usa variante success */
 export const AddButton = (props: Partial<PrimalButtonProps>) => (
   <PrimalButton variant="success" {...props} />
 )

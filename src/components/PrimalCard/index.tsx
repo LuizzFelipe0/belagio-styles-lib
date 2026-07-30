@@ -66,12 +66,10 @@ export const PrimalCard = ({
 
 // ─── Compositions ─────────────────────────────────────────────────────────────
 
-/** Card de perfil — elevação raised padrão */
 export const ProfileCard = (props: Partial<PrimalCardProps>) => (
   <PrimalCard variant="raised" {...props} />
 )
 
-/** Card de notificação — flat para uso em listas */
 export const NotificationCard = (props: Partial<PrimalCardProps>) => (
   <PrimalCard variant="flat" {...props} />
 )

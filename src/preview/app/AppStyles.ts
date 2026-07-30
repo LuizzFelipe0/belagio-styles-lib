@@ -35,9 +35,8 @@ export const layout = {
   } as React.CSSProperties,
 
   groupLabel: {
-    fontSize:      '1.1rem',
-    fontWeight:    700,
-    color:         '#8d8c8c',
+    fontSize:      '1.2rem',
+    color:        '#8d8c8c',
     textTransform: 'uppercase' as const,
     letterSpacing: '0.08em',
     marginBottom:  '1.2rem',

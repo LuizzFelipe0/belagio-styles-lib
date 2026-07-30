@@ -68,8 +68,8 @@ export const buttonStyles = {
     } as React.CSSProperties,
 
     focused: {
-      outline:       `2px solid ${tokens.colors.blue}`,
-      outlineOffset: '2px',
+      outline:       `1px solid ${tokens.colors.blue}`,
+      outlineOffset: '1px',
     } as React.CSSProperties,
 
     disabled: {

@@ -16,10 +16,10 @@ export const spacing = {
   '16': '6.4rem',  
 
   // --- Border radius  ---
-  radiusSm:   '0.6rem',  
-  radiusMd:   '0.8rem', 
-  radiusLg:   '1rem',  
-  radiusXl:   '1.2rem',  
+  radiusSm:   '0.4rem',  
+  radiusMd:   '0.6rem', 
+  radiusLg:   '0.8rem',  
+  radiusXl:   '1rem',  
   radiusFull: '9999rem', 
 } as const
 

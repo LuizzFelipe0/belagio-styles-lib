@@ -50,7 +50,7 @@ export const headerStyles = {
   locationText: {
     fontFamily: tokens.typography.fontFamily,
     fontSize:   tokens.typography.sizeSm,
-    color:      tokens.colors.textTertiary,
+    color:      tokens.colors.textSecondary,
     whiteSpace: 'nowrap',
   } as React.CSSProperties,
 

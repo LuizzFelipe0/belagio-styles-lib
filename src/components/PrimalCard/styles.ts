@@ -1,7 +1,3 @@
-// components/PrimalCard/styles.ts
-// Define todos os objetos de estilo do PrimalCard.
-// Unidades: rem para tudo. Exceção: box-shadow e outline usam px.
-
 import type React from 'react'
 import { tokens } from '../../tokens'
 
@@ -19,19 +15,16 @@ export const cardStyles = {
   } as React.CSSProperties,
 
   variants: {
-    // Flat: sem sombra, borda sutil — para uso sobre fundos brancos ou em listas
     flat: {
       boxShadow: 'none',
       border:    `1px solid ${tokens.colors.separator}`,
     } as React.CSSProperties,
 
-    // Raised: sombra padrão — uso geral
     raised: {
       boxShadow: '0 1px 4px rgba(0, 0, 0, 0.08)',
       border:    'none',
     } as React.CSSProperties,
 
-    // Elevated: sombra pronunciada — destaque ou modal-like
     elevated: {
       boxShadow: '0 4px 16px rgba(0, 0, 0, 0.12)',
       border:    'none',
@@ -39,7 +32,7 @@ export const cardStyles = {
   },
 
   states: {
-    // Hover: eleva o card levemente para indicar que é clicável
+    // Hover
     hovered: {
       boxShadow: '0 4px 16px rgba(0, 0, 0, 0.12)',
       transform: 'translateY(-1px)',
@@ -56,7 +49,6 @@ export const cardStyles = {
     } as React.CSSProperties,
   },
 
-  // Subestilos das áreas internas do card
   inner: {
     title: {
       fontWeight:   tokens.typography.weightBold,
