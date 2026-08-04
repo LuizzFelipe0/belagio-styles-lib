@@ -14,6 +14,8 @@ export const spacing = {
   '10': '4.0rem',  
   '12': '4.8rem',  
   '16': '6.4rem',  
+  '20': '8.0rem',
+  '24': '9.2rem',
 
   // --- Border radius  ---
   radiusSm:   '0.4rem',  
