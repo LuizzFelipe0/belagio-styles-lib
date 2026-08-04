@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
-import { cardStyles, type CardVariant } from './styles'
+import { cardStyles, type CardVariant, type CardSize } from './styles'
 
-// ─── Types ────────────────────────────────────────────────────────────────────
 
 export interface PrimalCardProps {
   variant?: CardVariant
+  size?: CardSize
+  hasHeader?: boolean
   title?: string
+  headerIcon?: string
+  headerIconAlt?: string
   description?: string
   children?: React.ReactNode
   onClick?: () => void
@@ -13,15 +16,38 @@ export interface PrimalCardProps {
   'aria-label'?: string
 }
 
-// ─── Component ────────────────────────────────────────────────────────────────
+
+const CardHeader = ({
+  title,
+  icon,
+  iconAlt = '',
+}: {
+  title?: string
+  icon?: string
+  iconAlt?: string
+}) => (
+  <div style={cardStyles.header.root}>
+    {icon && (
+      <img src={icon} alt={iconAlt} style={cardStyles.header.icon} />
+    )}
+    {title && (
+      <span style={cardStyles.header.title}>{title}</span>
+    )}
+  </div>
+)
+
 
 export const PrimalCard = ({
-  variant     = 'raised',
+  variant    = 'raised',
+  size       = 'sm',
+  hasHeader  = false,
   title,
+  headerIcon,
+  headerIconAlt = '',
   description,
   children,
   onClick,
-  disabled    = false,
+  disabled   = false,
   'aria-label': ariaLabel,
 }: PrimalCardProps) => {
   const [hovered, setHovered] = useState(false)
@@ -31,12 +57,12 @@ export const PrimalCard = ({
 
   const computedStyle: React.CSSProperties = {
     ...cardStyles.base,
+    ...cardStyles.sizes[size],
     ...cardStyles.variants[variant],
-    ...(isClickable ? { cursor: 'pointer' } : {}),
-
+    ...(isClickable          ? { cursor: 'pointer' }      : {}),
     ...(isClickable && hovered ? cardStyles.states.hovered  : {}),
-    ...(focused                ? cardStyles.states.focused  : {}),
-    ...(disabled               ? cardStyles.states.disabled : {}),
+    ...(focused              ? cardStyles.states.focused  : {}),
+    ...(disabled             ? cardStyles.states.disabled : {}),
   }
 
   return (
@@ -53,18 +79,32 @@ export const PrimalCard = ({
       onFocus={() => setFocused(true)}
       onBlur={() => setFocused(false)}
     >
-
+      {hasHeader && (
+        <CardHeader
+          title={title}
+          icon={headerIcon}
+          iconAlt={headerIconAlt}
+        />
+      )}
+      {/*
+        Body priority:
+        1. children  — full custom content
+        2. default   — icon + title (when no header) + description
+      */}
       {children ?? (
         <>
-          {title       && <div style={cardStyles.inner.title}>{title}</div>}
-          {description && <div style={cardStyles.inner.description}>{description}</div>}
+          {!hasHeader && title && (
+            <div style={cardStyles.inner.title}>{title}</div>
+          )}
+          {description && (
+            <div style={cardStyles.inner.description}>{description}</div>
+          )}
         </>
       )}
     </div>
   )
 }
 
-// ─── Compositions ─────────────────────────────────────────────────────────────
 
 export const ProfileCard = (props: Partial<PrimalCardProps>) => (
   <PrimalCard variant="raised" {...props} />
