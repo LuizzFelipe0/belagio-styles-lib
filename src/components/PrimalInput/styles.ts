@@ -5,7 +5,6 @@ export type InputSize = keyof typeof inputStyles.sizes
 
 export const inputStyles = {
 
-  // Wrapper: empilha label + input em coluna com espaçamento fixo
   wrapper: {
     display:       'flex',
     flexDirection: 'column',
@@ -14,22 +13,23 @@ export const inputStyles = {
   } as React.CSSProperties,
 
   label: {
-    fontFamily:  tokens.typography.fontFamily,
-    fontWeight:  tokens.typography.weightBold,
-    fontSize:    tokens.typography.sizeSm,
-    color:       tokens.colors.textSecondary,
-    userSelect:  'none',
+    fontFamily: tokens.typography.fontFamily,
+    fontWeight: tokens.typography.weightBold,
+    fontSize:   tokens.typography.sizeSm,
+    color:      tokens.colors.textSecondary,
+    userSelect: 'none',
   } as React.CSSProperties,
 
   base: {
-    fontFamily:   tokens.typography.fontFamily,
-    fontWeight:   tokens.typography.weightRegular,
-    borderRadius: tokens.spacing.radiusMd,
-    border:       `1px solid ${tokens.colors.border}`,
+    fontFamily:      tokens.typography.fontFamily,
+    fontWeight:      tokens.typography.weightRegular,
+    borderRadius:    tokens.spacing.radiusMd,
+    border:          `1px solid ${tokens.colors.border}`,
     backgroundColor: tokens.colors.surface,
-    color:        tokens.colors.textPrimary,
-    outline:      'none',
-    width:        '100%',
+    color:           tokens.colors.textPrimary,
+    outline:         'none',
+    width:           '100%',
+    transition:      'border-color 0.2s ease',
   } as React.CSSProperties,
 
   sizes: {
@@ -50,16 +50,13 @@ export const inputStyles = {
   },
 
   states: {
-    // Hover
     hovered: {
-      borderColor: tokens.colors.border,
-      cursor: 'pointer'
+      borderColor: tokens.colors.textTertiary,
+      cursor:      'pointer',
     } as React.CSSProperties,
 
-    // Foco
     focused: {
-      borderColor:   tokens.colors.border,
-      outlineOffset: '1px',
+      borderColor: tokens.colors.textTertiary,
     } as React.CSSProperties,
 
     disabled: {
