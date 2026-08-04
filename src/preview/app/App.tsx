@@ -137,7 +137,32 @@ export default function App() {
               <PrimalCard variant="elevated" title="Elevated" description="Pronounced shadow." />
             </div>
           </Group>
-
+ 
+          <Group label="Sizes">
+            <div style={layout.row}>
+              <PrimalCard size="sm" title="Small" description="Small Card" />
+              <PrimalCard size="md" title="Medium" description="Medium Card" />
+              <PrimalCard size="lg" title="Large" description="Large Card" />
+            </div>
+          </Group>
+ 
+          <Group label="With header (hasHeader)">
+            <div style={layout.row}>
+              <PrimalCard
+                hasHeader
+                title="Card Title"
+                description="Header with title only."
+              />
+              <PrimalCard
+                hasHeader
+                title="Card Title"
+                headerIcon="https://placehold.co/40x40/305CDE/FFFFFF?text=B"
+                headerIconAlt="App icon"
+                description="Header with icon and title."
+              />
+            </div>
+          </Group>
+ 
           <Group label="Clickable">
             <div style={layout.row}>
               <PrimalCard
@@ -147,17 +172,10 @@ export default function App() {
               />
             </div>
           </Group>
-
+ 
           <Group label="Disabled">
             <div style={layout.row}>
               <PrimalCard title="Disabled card" description="No interaction." disabled />
-            </div>
-          </Group>
-
-          <Group label="Compositions">
-            <div style={layout.row}>
-              <ProfileCard      title="Profile Card"      description="Raised composition." />
-              <NotificationCard title="Notification Card" description="Flat composition." />
             </div>
           </Group>
         </Section>
