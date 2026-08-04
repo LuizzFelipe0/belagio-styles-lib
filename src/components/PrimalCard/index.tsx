@@ -104,12 +104,3 @@ export const PrimalCard = ({
     </div>
   )
 }
-
-
-export const ProfileCard = (props: Partial<PrimalCardProps>) => (
-  <PrimalCard variant="raised" {...props} />
-)
-
-export const NotificationCard = (props: Partial<PrimalCardProps>) => (
-  <PrimalCard variant="flat" {...props} />
-)
