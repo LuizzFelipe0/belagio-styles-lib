@@ -4,7 +4,7 @@ import { layout } from './AppStyles'
 
 import { PrimalButton, DeleteButton, UpdateButton, AddButton } from '../../components/PrimalButton'
 import { PrimalInput, SearchInput, PasswordInput, EmailInput } from '../../components/PrimalInput'
-import { PrimalCard, ProfileCard, NotificationCard } from '../../components/PrimalCard'
+import { PrimalCard } from '../../components/PrimalCard'
 import { PrimalHeader } from '../../components/PrimalHeader'
 
 injectGlobalStyles()
