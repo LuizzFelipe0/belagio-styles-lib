@@ -64,11 +64,11 @@ export const buttonStyles = {
 
   states: {
     hovered: {
-      filter: 'brightness(0.92)',
+      filter: 'brightness(0.82)',
     } as React.CSSProperties,
 
     focused: {
-      outline:       `1px solid ${tokens.colors.blue}`,
+      
       outlineOffset: '1px',
     } as React.CSSProperties,
 
