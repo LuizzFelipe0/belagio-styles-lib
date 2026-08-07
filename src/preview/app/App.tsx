@@ -6,6 +6,8 @@ import { PrimalButton, DeleteButton, UpdateButton, AddButton } from '../../compo
 import { PrimalInput, SearchInput, PasswordInput, EmailInput } from '../../components/PrimalInput'
 import { PrimalCard } from '../../components/PrimalCard'
 import { PrimalHeader } from '../../components/PrimalHeader'
+import { PrimalTable } from '../../components/PrimalTable'
+import { PrimalSelect } from '../../components/PrimalSelect'
 
 injectGlobalStyles()
 
@@ -179,6 +181,74 @@ export default function App() {
             </div>
           </Group>
         </Section>
+
+        <Section title="Table">
+          <Group label="Title + columns + rows + actions">
+            <PrimalTable
+              title="Service Order Items"
+              columns={[
+                { key: 'type',        label: 'Type',       width: '16rem' },
+                { key: 'description', label: 'Description' },
+                { key: 'qty',         label: 'Qty',        width: '9rem',  align: 'right' },
+                { key: 'unitPrice',   label: 'Unit Price', width: '14rem', align: 'right' },
+                { key: 'total',       label: 'Total',      width: '12rem', align: 'right' },
+              ]}
+              rows={[
+                {
+                  id: 1,
+                  cells: {
+                    type:        <PrimalSelect options={[{ value: 'service', label: 'Service' }, { value: 'product', label: 'Product' }]} defaultValue="service" aria-label="Type" />,
+                    description: <PrimalInput placeholder="Ex: Oil change" aria-label="Description" />,
+                    qty:         <PrimalInput type="number" placeholder="1" aria-label="Qty" />,
+                    unitPrice:   <PrimalInput placeholder="0.00" aria-label="Unit price" />,
+                    total:       'R$ 0,00',
+                  },
+                },
+                {
+                  id: 2,
+                  cells: {
+                    type:        <PrimalSelect options={[{ value: 'service', label: 'Service' }, { value: 'product', label: 'Product' }]} defaultValue="product" aria-label="Type" />,
+                    description: <PrimalInput placeholder="Ex: 5W30 Oil" aria-label="Description" />,
+                    qty:         <PrimalInput type="number" placeholder="1" aria-label="Qty" />,
+                    unitPrice:   <PrimalInput placeholder="0.00" aria-label="Unit price" />,
+                    total:       'R$ 0,00',
+                  },
+                },
+              ]}
+              actions={<PrimalButton size="sm" onClick={() => alert('Add item')}>+ Add Item</PrimalButton>}
+            />
+          </Group>
+ 
+          <Group label="Text-only rows">
+            <PrimalTable
+              columns={[
+                { key: 'name',   label: 'Name' },
+                { key: 'role',   label: 'Role',   width: '16rem' },
+                { key: 'status', label: 'Status', width: '12rem', align: 'center' },
+              ]}
+              rows={[
+                { id: 1, cells: { name: 'Alice', role: 'Engineer',     status: 'Active'   } },
+                { id: 2, cells: { name: 'Bob',   role: 'Designer',     status: 'Active'   } },
+                { id: 3, cells: { name: 'Carol', role: 'Product Lead', status: 'On leave' } },
+                { id: 4, cells: { name: 'Dave',  role: 'Engineer',     status: 'Active'   } },
+              ]}
+            />
+          </Group>
+ 
+          <Group label="Empty state">
+            <PrimalTable
+              title="Empty Table"
+              columns={[
+                { key: 'name',   label: 'Name' },
+                { key: 'status', label: 'Status', width: '12rem' },
+                { key: 'date',   label: 'Date',   width: '14rem', align: 'right' },
+              ]}
+              rows={[]}
+              emptyMessage="No records found."
+            />
+          </Group>
+        </Section>
+ 
 
       </div>
     </>
