@@ -17,10 +17,10 @@
       "require": "./dist/components/PrimalButton/index.cjs",
       "types": "./dist/components/PrimalButton/index.d.ts"
     },
-    "./PrimalInput": {
-      "import": "./dist/components/PrimalInput/index.js",
-      "require": "./dist/components/PrimalInput/index.cjs",
-      "types": "./dist/components/PrimalInput/index.d.ts"
+    "./Input": {
+      "import": "./dist/components/Input/index.js",
+      "require": "./dist/components/Input/index.cjs",
+      "types": "./dist/components/Input/index.d.ts"
     },
     "./PrimalCard": {
       "import": "./dist/components/PrimalCard/index.js",

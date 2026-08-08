@@ -3,7 +3,7 @@ import { inputStyles, type InputSize } from './styles'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-export interface PrimalInputProps {
+export interface InputProps {
   type?: 'text' | 'password' | 'email' | 'search' | 'number' | 'tel'
   size?: InputSize
   placeholder?: string
@@ -16,7 +16,7 @@ export interface PrimalInputProps {
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
-export const PrimalInput = ({
+export const Input = ({
   type        = 'text',
   size        = 'md',
   placeholder = '',
@@ -25,14 +25,14 @@ export const PrimalInput = ({
   disabled    = false,
   onChange,
   'aria-label': ariaLabel,
-}: PrimalInputProps) => {
+}: InputProps) => {
   const [hovered, setHovered] = useState(false)
   const [focused, setFocused] = useState(false)
 
   const computedStyle: React.CSSProperties = {
     ...inputStyles.base,
     ...inputStyles.sizes[size],
-    // Hover só se aplica quando não há foco ativo (foco tem prioridade visual)
+
     ...(!disabled && hovered && !focused ? inputStyles.states.hovered  : {}),
     ...(!disabled && focused            ? inputStyles.states.focused  : {}),
     ...(disabled                        ? inputStyles.states.disabled : {}),
@@ -41,7 +41,6 @@ export const PrimalInput = ({
   return (
     <div style={inputStyles.wrapper}>
 
-      {/* Label só é renderizada quando fornecida */}
       {label && (
         <label style={inputStyles.label}>
           {label}
@@ -70,14 +69,14 @@ export const PrimalInput = ({
 
 // ─── Compositions ─────────────────────────────────────────────────────────────
 
-export const SearchInput = (props: Partial<PrimalInputProps>) => (
-  <PrimalInput type="search" placeholder="..." {...props} />
+export const SearchInput = (props: Partial<InputProps>) => (
+  <Input type="search" placeholder="..." {...props} />
 )
 
-export const PasswordInput = (props: Partial<PrimalInputProps>) => (
-  <PrimalInput type="password" placeholder="..." {...props} />
+export const PasswordInput = (props: Partial<InputProps>) => (
+  <Input type="password" placeholder="..." {...props} />
 )
 
-export const EmailInput = (props: Partial<PrimalInputProps>) => (
-  <PrimalInput type="email" placeholder="..." {...props} />
+export const EmailInput = (props: Partial<InputProps>) => (
+  <Input type="email" placeholder="..." {...props} />
 )

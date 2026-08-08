@@ -71,6 +71,7 @@ export const tableStyles = {
     padding:   `${tokens.spacing['10']} ${tokens.spacing['4']}`,
     color:     tokens.colors.textTertiary,
     fontSize:  tokens.typography.sizeMd,
+    backgroundColor: tokens.colors.background,
   } as React.CSSProperties,
 
 } as const

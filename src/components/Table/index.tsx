@@ -16,11 +16,11 @@ export interface TableColumn {
 export interface TableRow {
   id:    string | number
   // Each cell value is a ReactNode — the caller decides whether to pass
-  // plain text, a PrimalInput, a PrimalSelect, or any other element
+  // plain text, a Input, a Select, or any other element
   cells: Record<string, React.ReactNode>
 }
 
-export interface PrimalTableProps {
+export interface TableProps {
   columns:       TableColumn[]
   rows:          TableRow[]
   title?:        string
@@ -30,13 +30,13 @@ export interface PrimalTableProps {
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
-export const PrimalTable = ({
+export const Table = ({
   columns,
   rows,
   title,
   actions,
   emptyMessage = 'No data available.',
-}: PrimalTableProps) => {
+}: TableProps) => {
   const hasHeader = Boolean(title || actions)
 
   return (

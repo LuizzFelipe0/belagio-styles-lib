@@ -1,7 +1,7 @@
 import React from 'react'
 import { headerStyles } from './styles'
 
-export interface PrimalHeaderProps {
+export interface HeaderProps {
   icon?: string
   iconAlt?: string
   title?: string
@@ -9,13 +9,13 @@ export interface PrimalHeaderProps {
   actions?: React.ReactNode
 }
 
-export const PrimalHeader = ({
+export const Header = ({
   icon,
   iconAlt = '',
   title,
   locationText,
   actions,
-}: PrimalHeaderProps) => {
+}: HeaderProps) => {
   const hasLeft  = Boolean(icon || title)
   const hasRight = Boolean(locationText || actions)
 

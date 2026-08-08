@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { cardStyles, type CardVariant, type CardSize } from './styles'
 
 
-export interface PrimalCardProps {
+export interface CardProps {
   variant?: CardVariant
   size?: CardSize
   hasHeader?: boolean
@@ -37,7 +37,7 @@ const CardHeader = ({
 )
 
 
-export const PrimalCard = ({
+export const Card = ({
   variant    = 'raised',
   size       = 'sm',
   hasHeader  = false,
@@ -49,7 +49,7 @@ export const PrimalCard = ({
   onClick,
   disabled   = false,
   'aria-label': ariaLabel,
-}: PrimalCardProps) => {
+}: CardProps) => {
   const [hovered, setHovered] = useState(false)
   const [focused, setFocused] = useState(false)
 

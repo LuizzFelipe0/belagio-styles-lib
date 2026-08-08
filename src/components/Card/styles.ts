@@ -1,5 +1,3 @@
-// components/PrimalCard/styles.ts
-
 import type React from 'react'
 import { tokens } from '../../tokens'
 

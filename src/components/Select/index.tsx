@@ -8,7 +8,7 @@ export interface SelectOption {
   label: string
 }
 
-export interface PrimalSelectProps {
+export interface SelectProps {
   options: SelectOption[]
   value?: string
   defaultValue?: string
@@ -21,7 +21,7 @@ export interface PrimalSelectProps {
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
-export const PrimalSelect = ({
+export const Select = ({
   options,
   value,
   defaultValue,
@@ -30,7 +30,7 @@ export const PrimalSelect = ({
   disabled = false,
   onChange,
   'aria-label': ariaLabel,
-}: PrimalSelectProps) => {
+}: SelectProps) => {
   const [hovered, setHovered] = useState(false)
   const [focused, setFocused] = useState(false)
 
