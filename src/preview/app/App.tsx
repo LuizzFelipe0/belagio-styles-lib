@@ -2,12 +2,13 @@ import React from 'react'
 import { injectGlobalStyles } from '../../styles/global'
 import { layout } from './AppStyles'
 
-import { PrimalButton, DeleteButton, UpdateButton, AddButton } from '../../components/PrimalButton'
-import { PrimalInput, SearchInput, PasswordInput, EmailInput } from '../../components/PrimalInput'
-import { PrimalCard } from '../../components/PrimalCard'
-import { PrimalHeader } from '../../components/PrimalHeader'
-import { PrimalTable } from '../../components/PrimalTable'
-import { PrimalSelect } from '../../components/PrimalSelect'
+import { Button, DeleteButton, UpdateButton, AddButton } from '../../components/Button'
+import { Input, SearchInput, PasswordInput, EmailInput } from '../../components/Input'
+import { Card } from '../../components/Card'
+import { Header } from '../../components/Header'
+import { Table } from '../../components/Table'
+import { Select } from '../../components/Select'
+import { Footer } from '../../components/Footer'
 
 injectGlobalStyles()
 
@@ -36,24 +37,24 @@ export default function App() {
 
         <Section title="Header">
           <Group label="Icon + title + location + actions">
-            <PrimalHeader
+            <Header
               title="Header Title"
               locationText="Las Vegas, US"
               actions={
                 <>
-                  <PrimalButton size="sm" variant="ghost">Login</PrimalButton>
-                  <PrimalButton size="sm">Sign up</PrimalButton>
+                  <Button size="sm" variant="ghost">Login</Button>
+                  <Button size="sm">Sign up</Button>
                 </>
               }
             />
           </Group>
 
           <Group label="Title only">
-            <PrimalHeader title="Header Title" />
+            <Header title="Header Title" />
           </Group>
 
           <Group label="Icon + title only">
-            <PrimalHeader
+            <Header
               icon="https://placehold.co/32x32/007AFF/FFFFFF?text=B"
               iconAlt="Belagio logo"
               title="Header Title"
@@ -61,7 +62,7 @@ export default function App() {
           </Group>
 
           <Group label="Right side only (location + actions)">
-            <PrimalHeader
+            <Header
               locationText="Rio de Janeiro, Brazil"
               actions={<DeleteButton size="sm">Delete</DeleteButton>}
             />
@@ -72,26 +73,26 @@ export default function App() {
         <Section title="Button">
           <Group label="Variants">
             <div style={layout.row}>
-              <PrimalButton variant="primary">Primary</PrimalButton>
-              <PrimalButton variant="danger">Danger</PrimalButton>
-              <PrimalButton variant="success">Success</PrimalButton>
-              <PrimalButton variant="ghost">Ghost</PrimalButton>
+              <Button variant="primary">Primary</Button>
+              <Button variant="danger">Danger</Button>
+              <Button variant="success">Success</Button>
+              <Button variant="ghost">Ghost</Button>
             </div>
           </Group>
 
           <Group label="Sizes">
             <div style={layout.row}>
-              <PrimalButton size="sm">Small</PrimalButton>
-              <PrimalButton size="md">Medium</PrimalButton>
-              <PrimalButton size="lg">Large</PrimalButton>
+              <Button size="sm">Small</Button>
+              <Button size="md">Medium</Button>
+              <Button size="lg">Large</Button>
             </div>
           </Group>
 
           <Group label="Disabled">
             <div style={layout.row}>
-              <PrimalButton variant="primary" disabled>Primary</PrimalButton>
-              <PrimalButton variant="danger"  disabled>Danger</PrimalButton>
-              <PrimalButton variant="ghost"   disabled>Ghost</PrimalButton>
+              <Button variant="primary" disabled>Primary</Button>
+              <Button variant="danger"  disabled>Danger</Button>
+              <Button variant="ghost"   disabled>Ghost</Button>
             </div>
           </Group>
 
@@ -108,7 +109,7 @@ export default function App() {
         <Section title="Input">
           <Group label="Variants">
             <div style={layout.column}>
-              <PrimalInput   label="Text"     placeholder="Type something..." />
+              <Input   label="Text"     placeholder="Type something..." />
               <SearchInput   label="Search" />
               <PasswordInput label="Password" />
               <EmailInput    label="Email" />
@@ -117,15 +118,15 @@ export default function App() {
 
           <Group label="Sizes">
             <div style={layout.column}>
-              <PrimalInput size="sm" placeholder="Small" />
-              <PrimalInput size="md" placeholder="Medium" />
-              <PrimalInput size="lg" placeholder="Large" />
+              <Input size="sm" placeholder="Small" />
+              <Input size="md" placeholder="Medium" />
+              <Input size="lg" placeholder="Large" />
             </div>
           </Group>
 
           <Group label="Disabled">
             <div style={layout.column}>
-              <PrimalInput placeholder="Disabled input" disabled />
+              <Input placeholder="Disabled input" disabled />
             </div>
           </Group>
         </Section>
@@ -134,28 +135,28 @@ export default function App() {
         <Section title="Card">
           <Group label="Variants">
             <div style={layout.row}>
-              <PrimalCard variant="flat"     title="Flat"     description="No shadow, subtle border." />
-              <PrimalCard variant="raised"   title="Raised"   description="Default shadow." />
-              <PrimalCard variant="elevated" title="Elevated" description="Pronounced shadow." />
+              <Card variant="flat"     title="Flat"     description="No shadow, subtle border." />
+              <Card variant="raised"   title="Raised"   description="Default shadow." />
+              <Card variant="elevated" title="Elevated" description="Pronounced shadow." />
             </div>
           </Group>
  
           <Group label="Sizes">
             <div style={layout.row}>
-              <PrimalCard size="sm" title="Small" description="Small Card" />
-              <PrimalCard size="md" title="Medium" description="Medium Card" />
-              <PrimalCard size="lg" title="Large" description="Large Card" />
+              <Card size="sm" title="Small" description="Small Card" />
+              <Card size="md" title="Medium" description="Medium Card" />
+              <Card size="lg" title="Large" description="Large Card" />
             </div>
           </Group>
  
           <Group label="With header (hasHeader)">
             <div style={layout.row}>
-              <PrimalCard
+              <Card
                 hasHeader
                 title="Card Title"
                 description="Header with title only."
               />
-              <PrimalCard
+              <Card
                 hasHeader
                 title="Card Title"
                 headerIcon="https://placehold.co/40x40/305CDE/FFFFFF?text=B"
@@ -167,24 +168,24 @@ export default function App() {
  
           <Group label="Clickable">
             <div style={layout.row}>
-              <PrimalCard
+              <Card
                 title="Clickable card"
                 description="Hover to see elevation. Click to fire onClick."
-                onClick={() => alert('PrimalCard clicked!')}
+                onClick={() => alert('Card clicked!')}
               />
             </div>
           </Group>
  
           <Group label="Disabled">
             <div style={layout.row}>
-              <PrimalCard title="Disabled card" description="No interaction." disabled />
+              <Card title="Disabled card" description="No interaction." disabled />
             </div>
           </Group>
         </Section>
 
         <Section title="Table">
           <Group label="Title + columns + rows + actions">
-            <PrimalTable
+            <Table
               title="Service Order Items"
               columns={[
                 { key: 'type',        label: 'Type',       width: '16rem' },
@@ -197,30 +198,30 @@ export default function App() {
                 {
                   id: 1,
                   cells: {
-                    type:        <PrimalSelect options={[{ value: 'service', label: 'Service' }, { value: 'product', label: 'Product' }]} defaultValue="service" aria-label="Type" />,
-                    description: <PrimalInput placeholder="Ex: Oil change" aria-label="Description" />,
-                    qty:         <PrimalInput type="number" placeholder="1" aria-label="Qty" />,
-                    unitPrice:   <PrimalInput placeholder="0.00" aria-label="Unit price" />,
+                    type:        <Select options={[{ value: 'service', label: 'Service' }, { value: 'product', label: 'Product' }]} defaultValue="service" aria-label="Type" />,
+                    description: <Input placeholder="Ex: Oil change" aria-label="Description" />,
+                    qty:         <Input type="number" placeholder="1" aria-label="Qty" />,
+                    unitPrice:   <Input placeholder="0.00" aria-label="Unit price" />,
                     total:       'R$ 0,00',
                   },
                 },
                 {
                   id: 2,
                   cells: {
-                    type:        <PrimalSelect options={[{ value: 'service', label: 'Service' }, { value: 'product', label: 'Product' }]} defaultValue="product" aria-label="Type" />,
-                    description: <PrimalInput placeholder="Ex: 5W30 Oil" aria-label="Description" />,
-                    qty:         <PrimalInput type="number" placeholder="1" aria-label="Qty" />,
-                    unitPrice:   <PrimalInput placeholder="0.00" aria-label="Unit price" />,
+                    type:        <Select options={[{ value: 'service', label: 'Service' }, { value: 'product', label: 'Product' }]} defaultValue="product" aria-label="Type" />,
+                    description: <Input placeholder="Ex: 5W30 Oil" aria-label="Description" />,
+                    qty:         <Input type="number" placeholder="1" aria-label="Qty" />,
+                    unitPrice:   <Input placeholder="0.00" aria-label="Unit price" />,
                     total:       'R$ 0,00',
                   },
                 },
               ]}
-              actions={<PrimalButton size="sm" onClick={() => alert('Add item')}>+ Add Item</PrimalButton>}
+              actions={<Button size="sm" onClick={() => alert('Add item')}>+ Add Item</Button>}
             />
           </Group>
  
           <Group label="Text-only rows">
-            <PrimalTable
+            <Table
               columns={[
                 { key: 'name',   label: 'Name' },
                 { key: 'role',   label: 'Role',   width: '16rem' },
@@ -236,7 +237,7 @@ export default function App() {
           </Group>
  
           <Group label="Empty state">
-            <PrimalTable
+            <Table
               title="Empty Table"
               columns={[
                 { key: 'name',   label: 'Name' },
@@ -249,6 +250,15 @@ export default function App() {
           </Group>
         </Section>
  
+         <Section title="Footer">
+          <Group label="Footer + text on right, left and center">
+            <Footer
+              left={['belagiosystems@gmail.com']}
+              center={['© 2026 belagio-styles-lib', 'All rights reserved']}
+              right={['Las Vegas, US']}
+          />
+          </Group>
+         </Section>
 
       </div>
     </>
