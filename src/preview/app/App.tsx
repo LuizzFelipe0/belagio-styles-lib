@@ -9,6 +9,7 @@ import { Header } from '../../components/Header'
 import { Table } from '../../components/Table'
 import { Select } from '../../components/Select'
 import { Footer } from '../../components/Footer'
+import { ServiceDocument } from '../../components/ServiceDocument'
 
 injectGlobalStyles()
 
@@ -259,6 +260,51 @@ export default function App() {
           />
           </Group>
          </Section>
+
+         <Section title="Service Order Document">
+          <Group label="Service order example">
+            <ServiceDocument
+              companyName="Belagio Company"
+              tagline="Automotive Services"
+              contactLines={['3570 S Las Vegas Blvd — Las Vegas, US', '(+1) 866-227-5938']}
+              documentTitle="Service Order"
+              printTitle="Belagio_ServiceOrder.pdf"
+              meta={[
+                { label: 'Date / Time', value: '2026-01-15 09:30' },
+                { label: 'Payment',     value: 'Credit Card' },
+              ]}
+              sections={[
+                {
+                  title: 'Client',
+                  columns: [
+                    { key: 'field', label: 'Field', width: '30%' },
+                    { key: 'value', label: 'Value' },
+                  ],
+                  rows: [
+                    { id: 1, cells: { field: 'Name',  value: 'Stu Price'      } },
+                    { id: 2, cells: { field: 'Phone', value: '(+1) 555-1234' } },
+                  ],
+                },
+                {
+                  title: 'Items',
+                  columns: [
+                    { key: 'type',        label: 'Type'                              },
+                    { key: 'description', label: 'Description'                       },
+                    { key: 'qty',         label: 'Qty',        align: 'right' as const },
+                    { key: 'unit',        label: 'Unit Price', align: 'right' as const },
+                    { key: 'total',       label: 'Total',      align: 'right' as const },
+                  ],
+                  rows: [
+                    { id: 1, cells: { type: 'Service', description: 'Oil change', qty: 1, unit: 'R$ 80,00',  total: 'R$ 80,00'  } },
+                    { id: 2, cells: { type: 'Product', description: '5W30 Oil',   qty: 4, unit: 'R$ 25,00',  total: 'R$ 100,00' } },
+                  ],
+                },
+              ]}
+              footerText="Belagio Company — Las Vegas, US — (+1) 866-227-5938"
+            />
+          </Group>
+        </Section>
+
 
       </div>
     </>
