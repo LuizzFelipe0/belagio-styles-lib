@@ -264,8 +264,8 @@ export default function App() {
          <Section title="Service Order Document">
           <Group label="Service order example">
             <ServiceDocument
-              companyName="Belagio Company"
-              tagline="Automotive Services"
+              companyName="Belagio Systems"
+              tagline="IT Services"
               contactLines={['3570 S Las Vegas Blvd — Las Vegas, US', '(+1) 866-227-5938']}
               documentTitle="Service Order"
               printTitle="Belagio_ServiceOrder.pdf"
@@ -300,7 +300,7 @@ export default function App() {
                   ],
                 },
               ]}
-              footerText="Belagio Company — Las Vegas, US — (+1) 866-227-5938"
+              footerText="Belagio Systems — Las Vegas, US — (+1) 866-227-5938"
             />
           </Group>
         </Section>
