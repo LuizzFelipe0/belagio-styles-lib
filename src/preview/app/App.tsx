@@ -5,6 +5,7 @@ import { layout } from './AppStyles'
 import { Button, DeleteButton, UpdateButton, AddButton } from '../../components/Button'
 import { Input, SearchInput, PasswordInput, EmailInput } from '../../components/Input'
 import { Card } from '../../components/Card'
+import { DropdownCheckbox } from '../../components/DropdownCheckbox'
 import { Header } from '../../components/Header'
 import { Table } from '../../components/Table'
 import { Select } from '../../components/Select'
@@ -128,6 +129,28 @@ export default function App() {
           <Group label="Disabled">
             <div style={layout.column}>
               <Input placeholder="Disabled input" disabled />
+            </div>
+          </Group>
+        </Section>
+
+        <Section title="Dropdown Checkbox">
+          <Group label="Controlled selection with selected values">
+            <div style={layout.column}>
+              <DropdownCheckbox
+                label="Teams"
+                options={[
+                  { value: 'design', label: 'Design' },
+                  { value: 'engineering', label: 'Engineering' },
+                  { value: 'operations', label: 'Operations' },
+                ]}
+                defaultValue={['design']}
+                onChange={(values) => console.log('Selected teams:', values)}
+              />
+              <DropdownCheckbox
+                label="Disabled example"
+                options={[{ value: 'disabled', label: 'Unavailable option', disabled: true }]}
+                disabled
+              />
             </div>
           </Group>
         </Section>
