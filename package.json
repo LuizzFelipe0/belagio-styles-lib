@@ -11,21 +11,6 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs",
       "types": "./dist/index.d.ts"
-    },
-    "./PrimalButton": {
-      "import": "./dist/components/PrimalButton/index.js",
-      "require": "./dist/components/PrimalButton/index.cjs",
-      "types": "./dist/components/PrimalButton/index.d.ts"
-    },
-    "./Input": {
-      "import": "./dist/components/Input/index.js",
-      "require": "./dist/components/Input/index.cjs",
-      "types": "./dist/components/Input/index.d.ts"
-    },
-    "./PrimalCard": {
-      "import": "./dist/components/PrimalCard/index.js",
-      "require": "./dist/components/PrimalCard/index.cjs",
-      "types": "./dist/components/PrimalCard/index.d.ts"
     }
   },
   "files": [
@@ -33,7 +18,7 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "NODE_ENV=production tsc && NODE_ENV=production vite build",
+    "build": "tsc && vite build",
     "test": "vitest",
     "test:run": "vitest run",
     "typecheck": "tsc --noEmit"
