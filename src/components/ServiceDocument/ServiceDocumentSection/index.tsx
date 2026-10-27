@@ -1,6 +1,5 @@
-import React from 'react'
 import { serviceDocumentSectionStyles } from './styles'
-import { DocSection as DocSectionType } from '../types'
+import type { ServiceDocumentSection as DocSectionType } from '../types'
 
 export const ServiceDocumentSection = ({ section }: { section: DocSectionType }) => (
   <div style={serviceDocumentSectionStyles.root}>
