@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { injectGlobalStyles } from '../../styles/global'
 import { layout } from './AppStyles'
 
@@ -11,6 +11,7 @@ import { Table } from '../../components/Table'
 import { Select } from '../../components/Select'
 import { Footer } from '../../components/Footer'
 import { ServiceDocument } from '../../components/ServiceDocument'
+import { Sidebar } from '../../components/Sidebar'
 
 injectGlobalStyles()
 
@@ -30,12 +31,50 @@ const Group = ({ label, children }: { label: string; children: React.ReactNode }
 )
 
 export default function App() {
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [activeSidebarItem, setActiveSidebarItem] = useState('overview')
+
   return (
     <>
 
       <div style={layout.page}>
         <h1 style={layout.pageTitle}>belagio-styles-lib</h1>
         <p style={layout.subtitle}>Typescript Styles Library · Montserrat Bold · CSS-in-JS</p>
+
+        {sidebarOpen && (
+          <>
+            <button
+              type="button"
+              aria-label="Close sidebar"
+              onClick={() => setSidebarOpen(false)}
+              style={{
+                position: 'fixed',
+                inset: 0,
+                zIndex: 4,
+                border: 0,
+                background: 'rgba(20, 33, 59, 0.32)',
+                cursor: 'default',
+              }}
+            />
+            <Sidebar
+              id="preview-sidebar"
+              items={[
+                { id: 'overview', label: 'Overview', icon: '⌂' },
+                { id: 'components', label: 'Components', icon: '▦' },
+                { id: 'tokens', label: 'Design tokens', icon: '◈' },
+                { id: 'documentation', label: 'Documentation', icon: '▤' },
+              ]}
+              activeItem={activeSidebarItem}
+              onItemSelect={(id) => {
+                setActiveSidebarItem(id)
+                setSidebarOpen(false)
+              }}
+              brand={{ title: 'Belagio', subtitle: 'Styles Library', mark: 'B' }}
+              status={{ label: 'Library ready', tone: 'success' }}
+              profile={{ initials: 'DS', name: 'Design system', description: 'Preview workspace' }}
+            />
+          </>
+        )}
 
         <Section title="Header">
           <Group label="Icon + title + location + actions">
@@ -46,6 +85,15 @@ export default function App() {
                 <>
                   <Button size="sm" variant="ghost">Login</Button>
                   <Button size="sm">Sign up</Button>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    aria-controls="preview-sidebar"
+                    aria-expanded={sidebarOpen}
+                    onClick={() => setSidebarOpen((open) => !open)}
+                  >
+                    Sidebar
+                  </Button>
                 </>
               }
             />

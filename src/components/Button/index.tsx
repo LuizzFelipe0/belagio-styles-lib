@@ -10,7 +10,10 @@ export interface ButtonProps {
   loading?: boolean
   children?: React.ReactNode
   onClick?: () => void
+  className?: string
   'aria-label'?: string
+  'aria-controls'?: string
+  'aria-expanded'?: boolean
 }
 
 // ─── Component ────────────────────────────────────────────────────────────────
@@ -22,7 +25,10 @@ export const Button = ({
   loading  = false,
   children,
   onClick,
+  className,
   'aria-label': ariaLabel,
+  'aria-controls': ariaControls,
+  'aria-expanded': ariaExpanded,
 }: ButtonProps) => {
   const [hovered, setHovered] = useState(false)
   const [focused, setFocused] = useState(false)
@@ -42,9 +48,12 @@ export const Button = ({
   return (
     <button
       style={computedStyle}
+      className={className}
       disabled={isInert}
       aria-disabled={isInert}
       aria-label={ariaLabel}
+      aria-controls={ariaControls}
+      aria-expanded={ariaExpanded}
       aria-busy={loading}
       onClick={!isInert ? onClick : undefined}
       onMouseEnter={() => setHovered(true)}

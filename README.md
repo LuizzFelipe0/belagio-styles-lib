@@ -45,6 +45,7 @@ import {
   Header,
   Input,
   Select,
+  Sidebar,
   Table,
   injectGlobalStyles,
 } from 'belagio-styles-lib'
@@ -73,6 +74,18 @@ export function ExamplePage() {
           { value: 'paused', label: 'Paused' },
         ]}
       />
+      <Sidebar
+        brand={{ title: 'Belagio', subtitle: 'WORKSPACE', mark: 'B' }}
+        sectionLabel="Workspace"
+        items={[
+          { id: 'overview', label: 'Overview', icon: '◫' },
+          { id: 'inventory', label: 'Inventory', icon: '▤', badge: 3 },
+        ]}
+        activeItem="overview"
+        onItemSelect={(id) => console.log(id)}
+        status={{ label: 'All changes saved', tone: 'success' }}
+        profile={{ initials: 'BS', name: 'Workspace', description: 'Administrator' }}
+      />
       <Table
         columns={[{ key: 'name', label: 'Name' }]}
         rows={[{ id: '1', cells: { name: 'Alex Morgan' } }]}
@@ -84,6 +97,8 @@ export function ExamplePage() {
 ```
 
 `DropdownCheckbox` aceita uma lista de opções `{ value, label, disabled? }`. Use `defaultValue` para iniciar uma seleção não controlada ou `value` para controlar a seleção pelo estado do projeto consumidor. `onChange` recebe a lista atualizada de valores; o painel fecha ao clicar fora ou pressionar `Escape`.
+
+`Sidebar` oferece uma navegação responsiva com marca, item ativo, badges opcionais, status e perfil. Cada item usa um `id` estável; `onItemSelect` recebe o ID selecionado. Em telas estreitas, a navegação passa para uma barra inferior.
 
 `injectGlobalStyles()` adds the library's reset and base styles once to the document and requests the Montserrat font. Call it once from the consuming app's entry point. For server-side rendering it safely does nothing until a browser document is available.
 

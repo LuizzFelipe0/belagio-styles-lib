@@ -18,6 +18,9 @@ export { Footer } from './components/Footer'
 export type { HeaderProps } from './components/Header'
 export { Header } from './components/Header'
 
+export type { SidebarBrand, SidebarItem, SidebarProfile, SidebarProps, SidebarStatus } from './components/Sidebar'
+export { Sidebar } from './components/Sidebar'
+
 export type { InputProps } from './components/Input'
 export { EmailInput, Input, PasswordInput, SearchInput } from './components/Input'
 
