@@ -1,152 +1,89 @@
-# belagio-styles-lib
+<p align="center">
+  <img src="assets/belagio-styles-lib-banner.png" alt="BELAGIO-styles-lib" width="100%" />
+</p>
 
-Biblioteca reutilizável de componentes React em TypeScript, com tokens de design e estilos CSS-in-JS aplicados diretamente aos componentes.
+# BELAGIO-styles-lib
 
-## Requisitos
+A reusable React component library written in TypeScript, with design tokens and CSS-in-JS styles.
 
-- Node.js 20 ou superior
+## Requirements
+
+- Node.js 20 or later
 - npm
-- React 18 ou superior e React DOM 18 ou superior no projeto consumidor
+- React 18 or later and React DOM 18 or later in the consuming project
 
-## Instalação
+## Installation
 
-Para desenvolver a biblioteca localmente:
-
-```bash
-npm install
-```
-
-Para instalar a biblioteca a partir de um checkout local em outro projeto, gere primeiro o pacote compilado:
+To install from a local checkout, build the library first:
 
 ```bash
-# Dentro de belagio-styles-lib
+# In the library directory
 npm install
 npm run build
 
-# Dentro do projeto consumidor
-npm install ../caminho/para/belagio-styles-lib
+# In the consuming project
+npm install ../path/to/belagio-styles-lib
 ```
 
-Quando a biblioteca estiver publicada em um registry npm, instale-a pelo nome do pacote:
+To use the npm package, install it by name after it has been published:
 
 ```bash
 npm install belagio-styles-lib
 ```
 
-## Uso
+## Quick start
 
-Importe componentes e tipos pelo ponto de entrada principal:
+Import the components you need and call `injectGlobalStyles()` once from your app's entry point:
 
 ```tsx
-import {
-  Button,
-  Card,
-  DropdownCheckbox,
-  Header,
-  Input,
-  Select,
-  Sidebar,
-  Table,
-  injectGlobalStyles,
-} from 'belagio-styles-lib'
+import { Button, Card, Input, injectGlobalStyles } from 'belagio-styles-lib'
 
 injectGlobalStyles()
 
 export function ExamplePage() {
   return (
     <>
-      <Header title="Dashboard" locationText="New York" />
       <Card title="Profile" description="Manage your account details." />
       <Input label="Email" type="email" placeholder="you@example.com" />
-      <DropdownCheckbox
-        label="Teams"
-        options={[
-          { value: 'design', label: 'Design' },
-          { value: 'engineering', label: 'Engineering' },
-        ]}
-        defaultValue={['design']}
-        onChange={(values) => console.log(values)}
-      />
-      <Select
-        label="Status"
-        options={[
-          { value: 'active', label: 'Active' },
-          { value: 'paused', label: 'Paused' },
-        ]}
-      />
-      <Sidebar
-        brand={{ title: 'Belagio', subtitle: 'WORKSPACE', mark: 'B' }}
-        sectionLabel="Workspace"
-        items={[
-          { id: 'overview', label: 'Overview', icon: '◫' },
-          { id: 'inventory', label: 'Inventory', icon: '▤', badge: 3 },
-        ]}
-        activeItem="overview"
-        onItemSelect={(id) => console.log(id)}
-        status={{ label: 'All changes saved', tone: 'success' }}
-        profile={{ initials: 'BS', name: 'Workspace', description: 'Administrator' }}
-      />
-      <Table
-        columns={[{ key: 'name', label: 'Name' }]}
-        rows={[{ id: '1', cells: { name: 'Alex Morgan' } }]}
-      />
       <Button onClick={() => window.alert('Saved')}>Save</Button>
     </>
   )
 }
 ```
 
-`DropdownCheckbox` aceita uma lista de opções `{ value, label, disabled? }`. Use `defaultValue` para iniciar uma seleção não controlada ou `value` para controlar a seleção pelo estado do projeto consumidor. `onChange` recebe a lista atualizada de valores; o painel fecha ao clicar fora ou pressionar `Escape`.
+`injectGlobalStyles()` applies the library's reset and base styles and requests the Montserrat font. It safely does nothing when no browser document is available, such as during server-side rendering.
 
-`Sidebar` oferece uma navegação responsiva com marca, item ativo, badges opcionais, status e perfil. Cada item usa um `id` estável; `onItemSelect` recebe o ID selecionado. Em telas estreitas, a navegação passa para uma barra inferior.
+## Components and utilities
 
-`injectGlobalStyles()` adds the library's reset and base styles once to the document and requests the Montserrat font. Call it once from the consuming app's entry point. For server-side rendering it safely does nothing until a browser document is available.
+- **Buttons:** `Button`, `AddButton`, `UpdateButton`, `DeleteButton`
+- **Content and navigation:** `Card`, `Header`, `Footer`, `Sidebar`, `ServiceDocument`
+- **Form controls:** `Input`, `EmailInput`, `PasswordInput`, `SearchInput`, `Select`, `DropdownCheckbox`
+- **Data display:** `Table`
+- **Design system:** `colors`, `spacing`, `tokens`, `typography`, `injectGlobalStyles`
 
-## Executar o preview
+`DropdownCheckbox` accepts options with `value`, `label`, and an optional `disabled` flag. Use `defaultValue` for an uncontrolled selection or `value` to control it; `onChange` receives the selected values. The menu closes when the user clicks outside it or presses `Escape`.
 
-Na pasta da biblioteca, instale as dependências e inicie o servidor de desenvolvimento Vite:
+`Sidebar` supports a brand, active item, optional badges, status, and profile. Each item uses a stable `id`, which is passed to `onItemSelect`. On narrow screens, the navigation becomes a bottom bar.
+
+## Development
+
+Install dependencies and start the Vite preview:
 
 ```bash
 npm install
 npm run dev
 ```
 
-O Vite abre o preview no navegador, normalmente em `http://localhost:3000`.
+The preview runs at `http://localhost:3000`.
 
-Para gerar os arquivos de distribuição em `dist/`:
+## Scripts
 
-```bash
-npm run build
-```
-
-Para verificar apenas os tipos TypeScript:
-
-```bash
-npm run typecheck
-```
-
-## Testes
-
-Os testes unitários usam Vitest, React Testing Library, jest-dom e jsdom. Para executar uma vez:
-
-```bash
-npm run test:run
-```
-
-Para iniciar o Vitest em modo watch:
-
-```bash
-npm test
-```
-
-Os arquivos de teste ficam junto aos componentes em `src/components/`. O GitHub Actions executa a suíte automaticamente em cada push e pull request.
-
-## Scripts npm
-
-| Script | Descrição |
+| Command | Description |
 | --- | --- |
-| `npm run dev` | Inicia o preview do Vite. |
-| `npm run build` | Verifica os tipos e gera a biblioteca em `dist/`. |
-| `npm run typecheck` | Verifica os tipos sem gerar arquivos. |
-| `npm test` | Executa o Vitest em modo watch. |
-| `npm run test:run` | Executa todos os testes uma vez. |
+| `npm run dev` | Starts the Vite preview. |
+| `npm run build` | Type-checks the project and builds the library in `dist/`. |
+| `npm run typecheck` | Checks TypeScript types without building. |
+| `npm test` | Runs Vitest in watch mode. |
+| `npm run test:run` | Runs the test suite once. |
+
+Tests are located alongside components in `src/components/`. GitHub Actions runs the test suite on pushes and pull requests.
