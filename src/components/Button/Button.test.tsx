@@ -13,6 +13,11 @@ describe('Button', () => {
     expect(button.style.padding).not.toBe('')
   })
 
+  it('uses the shared medium control height', () => {
+    render(<Button>Save</Button>)
+    expect(screen.getByRole('button', { name: 'Save' })).toHaveStyle({ height: '42px', minHeight: '42px' })
+  })
+
   it('calls onClick when activated', () => {
     const onClick = vi.fn()
     render(<Button onClick={onClick}>Salvar</Button>)
