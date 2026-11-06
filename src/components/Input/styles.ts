@@ -39,7 +39,10 @@ export const inputStyles = {
     } as React.CSSProperties,
 
     md: {
-      padding:  `${tokens.spacing['3']} ${tokens.spacing['4']}`,
+      boxSizing: 'border-box',
+      height:    '42px',
+      minHeight: '42px',
+      padding:  `0 ${tokens.spacing['4']}`,
       fontSize: tokens.typography.sizeMd,
     } as React.CSSProperties,
 
