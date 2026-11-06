@@ -17,6 +17,11 @@ describe('Select', () => {
     expect(screen.getByRole('option', { name: 'Sent' })).toHaveValue('sent')
   })
 
+  it('uses the shared medium control height', () => {
+    render(<Select aria-label="Status" options={options} />)
+    expect(screen.getByRole('combobox', { name: 'Status' })).toHaveStyle({ height: '42px', minHeight: '42px' })
+  })
+
   it('supports an initial default value and reports changes', () => {
     const onChange = vi.fn()
     render(<Select options={options} defaultValue="draft" onChange={onChange} />)
