@@ -22,6 +22,11 @@ describe('DropdownCheckbox', () => {
     expect(screen.getByRole('checkbox', { name: 'Design' })).toBeVisible()
   })
 
+  it('uses the shared medium control height', () => {
+    render(<DropdownCheckbox options={options} aria-label="Teams" />)
+    expect(screen.getByRole('button', { name: 'Teams' })).toHaveStyle({ height: '42px', minHeight: '42px' })
+  })
+
   it('updates its uncontrolled selection and reports the selected values', () => {
     const onChange = vi.fn()
     render(<DropdownCheckbox options={options} label="Teams" onChange={onChange} />)
