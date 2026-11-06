@@ -12,6 +12,11 @@ describe('Input', () => {
     expect(input).toHaveValue('Alex')
   })
 
+  it('uses the shared medium control height', () => {
+    render(<Input aria-label="Name" />)
+    expect(screen.getByRole('textbox', { name: 'Name' })).toHaveStyle({ height: '42px', minHeight: '42px' })
+  })
+
   it('renders a visible label and reports changed values', () => {
     const onChange = vi.fn()
     render(<Input label="Email" onChange={onChange} />)
