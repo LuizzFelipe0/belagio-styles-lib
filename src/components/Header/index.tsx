@@ -1,5 +1,6 @@
 import React from 'react'
 import { headerStyles } from './styles'
+import { colors } from '../../tokens'
 
 export interface HeaderProps {
   icon?: string
@@ -7,6 +8,7 @@ export interface HeaderProps {
   title?: string
   locationText?: string
   actions?: React.ReactNode
+  backgroundColor?: string
 }
 
 export const Header = ({
@@ -15,12 +17,13 @@ export const Header = ({
   title,
   locationText,
   actions,
+  backgroundColor = colors.background,
 }: HeaderProps) => {
   const hasLeft  = Boolean(icon || title)
   const hasRight = Boolean(locationText || actions)
 
   return (
-    <header style={headerStyles.root}>
+    <header style={{ ...headerStyles.root, backgroundColor }}>
 
       {hasLeft && (
         <div style={headerStyles.left}>
