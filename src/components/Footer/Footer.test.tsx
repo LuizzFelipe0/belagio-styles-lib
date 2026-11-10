@@ -17,4 +17,9 @@ describe('Footer', () => {
     expect(container.querySelectorAll('span')).toHaveLength(0)
     expect(screen.getByRole('contentinfo')).toBeInTheDocument()
   })
+
+  it('allows consumers to set the footer background color', () => {
+    render(<Footer backgroundColor="#DBDBDB" left={['Disk Ressurect']} />)
+    expect(screen.getByRole('contentinfo')).toHaveStyle({ backgroundColor: '#DBDBDB' })
+  })
 })

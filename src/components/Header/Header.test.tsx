@@ -23,4 +23,9 @@ describe('Header', () => {
     expect(screen.getByRole('banner')).toBeInTheDocument()
     expect(container.querySelectorAll('img')).toHaveLength(0)
   })
+
+  it('allows consumers to set the header background color', () => {
+    render(<Header backgroundColor="#DBDBDB" title="Disk Ressurect" />)
+    expect(screen.getByRole('banner')).toHaveStyle({ backgroundColor: '#DBDBDB' })
+  })
 })
