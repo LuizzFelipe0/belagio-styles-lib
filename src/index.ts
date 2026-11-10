@@ -18,6 +18,9 @@ export { Footer } from './components/Footer'
 export type { HeaderProps } from './components/Header'
 export { Header } from './components/Header'
 
+export type { LanguageToggleProps, LanguageToggleSize, SiteLanguage } from './components/LanguageToggle'
+export { LanguageToggle } from './components/LanguageToggle'
+
 export type { SidebarBrand, SidebarItem, SidebarProfile, SidebarProps, SidebarStatus } from './components/Sidebar'
 export { Sidebar } from './components/Sidebar'
 

@@ -12,6 +12,7 @@ import { Select } from '../../components/Select'
 import { Footer } from '../../components/Footer'
 import { ServiceDocument } from '../../components/ServiceDocument'
 import { Sidebar } from '../../components/Sidebar'
+import { LanguageToggle, type SiteLanguage } from '../../components/LanguageToggle'
 
 injectGlobalStyles()
 
@@ -33,6 +34,7 @@ const Group = ({ label, children }: { label: string; children: React.ReactNode }
 export default function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [activeSidebarItem, setActiveSidebarItem] = useState('overview')
+  const [siteLanguage, setSiteLanguage] = useState<SiteLanguage>('pt-BR')
 
   return (
     <>
@@ -116,6 +118,23 @@ export default function App() {
               locationText="Rio de Janeiro, Brazil"
               actions={<DeleteButton size="sm">Delete</DeleteButton>}
             />
+          </Group>
+        </Section>
+
+        <Section title="Language Toggle">
+          <Group label="Choose the site language">
+            <div style={layout.row}>
+              <LanguageToggle
+                value={siteLanguage}
+                onChange={setSiteLanguage}
+              />
+            </div>
+          </Group>
+          <Group label="Small and disabled">
+            <div style={layout.row}>
+              <LanguageToggle size="sm" defaultValue="en-US" />
+              <LanguageToggle disabled defaultValue="en-US" />
+            </div>
           </Group>
         </Section>
 
