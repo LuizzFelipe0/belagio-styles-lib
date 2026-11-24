@@ -36,7 +36,7 @@ npm install belagio-styles-lib
 Import the components you need and call `injectGlobalStyles()` once from your app's entry point:
 
 ```tsx
-import { Button, Card, Input, injectGlobalStyles } from 'belagio-styles-lib'
+import { Button, Card, InfoButton, Input, injectGlobalStyles } from 'belagio-styles-lib'
 
 injectGlobalStyles()
 
@@ -45,7 +45,10 @@ export function ExamplePage() {
     <>
       <Card title="Profile" description="Manage your account details." />
       <Input label="Email" type="email" placeholder="you@example.com" />
-      <Button onClick={() => window.alert('Saved')}>Save</Button>
+      <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+        <Button onClick={() => window.alert('Saved')}>Save</Button>
+        <InfoButton description="This explains what the action does." />
+      </span>
     </>
   )
 }
@@ -55,13 +58,15 @@ export function ExamplePage() {
 
 ## Components and utilities
 
-- **Buttons:** `Button`, `AddButton`, `UpdateButton`, `DeleteButton`
+- **Buttons:** `Button`, `AddButton`, `UpdateButton`, `DeleteButton`, `InfoButton`
 - **Content and navigation:** `Card`, `Header`, `Footer`, `Sidebar`, `ServiceDocument`
 - **Form controls:** `Input`, `EmailInput`, `PasswordInput`, `SearchInput`, `Select`, `DropdownCheckbox`
 - **Data display:** `Table`
 - **Design system:** `colors`, `spacing`, `tokens`, `typography`, `injectGlobalStyles`
 
 `DropdownCheckbox` accepts options with `value`, `label`, and an optional `disabled` flag. Use `defaultValue` for an uncontrolled selection or `value` to control it; `onChange` receives the selected values. The menu closes when the user clicks outside it or presses `Escape`.
+
+`InfoButton` accepts a `description` and an optional `hoverColor` to customize the color of its icon and circular border while active.
 
 `Sidebar` supports a brand, active item, optional badges, status, and profile. Each item uses a stable `id`, which is passed to `onItemSelect`. On narrow screens, the navigation becomes a bottom bar.
 

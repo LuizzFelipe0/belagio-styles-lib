@@ -2,6 +2,9 @@
 export type { ButtonProps } from './components/Button'
 export { AddButton, Button, DeleteButton, UpdateButton } from './components/Button'
 
+export type { InfoButtonProps } from './components/InfoButton'
+export { InfoButton } from './components/InfoButton'
+
 export type { CardProps } from './components/Card'
 export { Card } from './components/Card'
 

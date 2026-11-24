@@ -3,6 +3,7 @@ import { injectGlobalStyles } from '../../styles/global'
 import { layout } from './AppStyles'
 
 import { Button, DeleteButton, UpdateButton, AddButton } from '../../components/Button'
+import { InfoButton } from '../../components/InfoButton'
 import { Input, SearchInput, PasswordInput, EmailInput } from '../../components/Input'
 import { Card } from '../../components/Card'
 import { DropdownCheckbox } from '../../components/DropdownCheckbox'
@@ -170,6 +171,10 @@ export default function App() {
               <DeleteButton>Delete</DeleteButton>
               <UpdateButton>Update</UpdateButton>
               <AddButton>Add</AddButton>
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.8rem' }}>
+                <Button>With details</Button>
+                <InfoButton description="Explique aqui o que este botão faz." />
+              </span>
             </div>
           </Group>
         </Section>
