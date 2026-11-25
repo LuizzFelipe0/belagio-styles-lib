@@ -7,7 +7,7 @@ export const progressStyles = {
     width: '100%',
     height: '3rem',
     overflow: 'hidden',
-    borderRadius: spacing.radiusFull,
+    borderRadius: spacing.radiusMd,
     backgroundColor: 'var(--belagio-progress-track, #E0E0E0)',
   } as React.CSSProperties,
   fill: (percent: number, fillColor?: string): React.CSSProperties => ({
@@ -17,7 +17,7 @@ export const progressStyles = {
     width: `${percent}%`,
     minWidth: percent > 0 && percent < 12 ? '4rem' : undefined,
     height: '100%',
-    borderRadius: spacing.radiusFull,
+    borderRadius: spacing.radiusLg,
     backgroundColor: fillColor ?? 'var(--belagio-progress-fill, #4CAF50)',
     transition: 'width 180ms ease',
   }),
