@@ -65,7 +65,7 @@ describe('form controls and shared primitives', () => {
     expect(progress.querySelector('span')).toHaveTextContent('50%')
     const track = progress.firstElementChild
     const fill = track?.firstElementChild
-    expect(fill).toHaveStyle({ width: '50%', borderRadius: '0.6rem' })
+    expect(fill).toHaveStyle({ width: '50%', borderRadius: '0.8rem' })
     expect(track).toHaveStyle({ borderRadius: '0.6rem' })
     expect(screen.getByRole('progressbar', { name: 'Custom scan progress' }).firstElementChild?.firstElementChild).toHaveStyle({ backgroundColor: '#9C27B0' })
   })
