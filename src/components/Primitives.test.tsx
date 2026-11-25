@@ -63,7 +63,10 @@ describe('form controls and shared primitives', () => {
     const progress = screen.getByRole('progressbar', { name: 'Scan progress' })
     expect(progress).toHaveAttribute('aria-valuetext', '50%')
     expect(progress.querySelector('span')).toHaveTextContent('50%')
-    expect(progress.firstElementChild?.firstElementChild).toHaveStyle({ width: '50%' })
+    const track = progress.firstElementChild
+    const fill = track?.firstElementChild
+    expect(fill).toHaveStyle({ width: '50%', borderRadius: '0.6rem' })
+    expect(track).toHaveStyle({ borderRadius: '0.6rem' })
     expect(screen.getByRole('progressbar', { name: 'Custom scan progress' }).firstElementChild?.firstElementChild).toHaveStyle({ backgroundColor: '#9C27B0' })
   })
 
