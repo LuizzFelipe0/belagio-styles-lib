@@ -25,13 +25,13 @@ export const alertStyles = {
     ...customStyle,
   }),
   content: { display: 'grid', gap: spacing['1'], minWidth: 0 } as React.CSSProperties,
-  closeButton: (color: string): React.CSSProperties => ({
-      flex: '0 0 auto',
-      width: '3.2rem',
-      minWidth: '3.2rem',
-      height: '3.2rem',
-      padding: 0,
-      color,
-      border: `1px solid ${color}`,
-    }),
+  closeButton: (tone: AlertTone): React.CSSProperties => ({
+    flex: '0 0 auto',
+    width: '3.2rem',
+    minWidth: '3.2rem',
+    height: '3.2rem',
+    padding: 0,
+    color: tones[tone].color,
+    border: `1px solid ${tones[tone].color}`,
+  }),
 }

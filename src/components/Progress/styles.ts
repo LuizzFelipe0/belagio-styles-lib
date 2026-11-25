@@ -5,7 +5,7 @@ export const progressStyles = {
   root: (customStyle?: React.CSSProperties): React.CSSProperties => ({ width: '100%', ...customStyle }),
   track: {
     width: '100%',
-    height: '3rem',
+    height: '1.875rem',
     overflow: 'hidden',
     borderRadius: spacing.radiusFull,
     backgroundColor: 'var(--belagio-progress-track, #E0E0E0)',

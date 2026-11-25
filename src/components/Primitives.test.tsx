@@ -73,8 +73,10 @@ describe('form controls and shared primitives', () => {
       <Alert tone="warning" title="Partial result" onClose={onClose}>Some areas could not be checked.</Alert>
       <EmptyState title="No disks found" description="Connect a disk to continue." />
     </>)
-    expect(screen.getByRole('status')).toHaveTextContent('Some areas could not be checked.')
-    fireEvent.click(screen.getByRole('button', { name: 'Dismiss message' }))
+    expect(screen.getByText('Some areas could not be checked.').closest('[role="status"]')).toHaveTextContent('Some areas could not be checked.')
+    const dismissButton = screen.getByRole('button', { name: 'Dismiss message' })
+    expect(dismissButton).toHaveStyle({ width: '3.2rem', minWidth: '3.2rem', height: '3.2rem' })
+    fireEvent.click(dismissButton)
     expect(onClose).toHaveBeenCalledOnce()
     expect(screen.getByRole('heading', { name: 'No disks found' })).toBeInTheDocument()
   })

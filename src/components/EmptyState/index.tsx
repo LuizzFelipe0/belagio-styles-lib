@@ -11,7 +11,7 @@ export interface EmptyStateProps {
 
 export function EmptyState({ title, description, action, className, style }: EmptyStateProps) {
   return (
-    <section className={className} style={emptyStateStyles.root(style)}>
+    <section role="status" aria-live="polite" className={className} style={emptyStateStyles.root(style)}>
       <h2 style={emptyStateStyles.title}>{title}</h2>
       {description && <p style={emptyStateStyles.description}>{description}</p>}
       {action}

@@ -12,11 +12,14 @@ export interface DialogProps {
   closeButtonColor?: string
   initialFocusRef?: React.RefObject<HTMLElement>
   className?: string
+  id?: string
+  closeOnBackdropClick?: boolean
+  styles?: Partial<Record<'backdrop' | 'dialog' | 'header' | 'title' | 'description' | 'body' | 'closeButton', React.CSSProperties>>
 }
 
 const focusableSelector = 'a[href], button:not(:disabled), input:not(:disabled), select:not(:disabled), textarea:not(:disabled), [tabindex]:not([tabindex="-1"])'
 
-export function Dialog({ open, onClose, title, children, description, closeLabel = 'Close dialog', closeButtonColor = '#000000', initialFocusRef, className }: DialogProps) {
+export function Dialog({ open, onClose, title, children, description, closeLabel = 'Close dialog', closeButtonColor = '#000000', initialFocusRef, className, id, closeOnBackdropClick = false, styles = {} }: DialogProps) {
   const dialogRef = useRef<HTMLDivElement>(null)
   const onCloseRef = useRef(onClose)
   onCloseRef.current = onClose
@@ -65,7 +68,9 @@ export function Dialog({ open, onClose, title, children, description, closeLabel
   if (!open) return null
 
   return (
-    <div style={dialogStyles.backdrop}>
+    <div style={{ ...dialogStyles.backdrop, ...styles.backdrop }} onMouseDown={(event) => {
+      if (closeOnBackdropClick && event.target === event.currentTarget) onCloseRef.current()
+    }}>
       <div
         ref={dialogRef}
         role="dialog"
@@ -74,16 +79,17 @@ export function Dialog({ open, onClose, title, children, description, closeLabel
         aria-describedby={description ? descriptionId : undefined}
         tabIndex={-1}
         className={className}
-        style={dialogStyles.dialog}
+        id={id}
+        style={{ ...dialogStyles.dialog, ...styles.dialog }}
       >
-        <header style={dialogStyles.header}>
+        <header style={{ ...dialogStyles.header, ...styles.header }}>
           <div>
-            <h2 id={titleId} style={dialogStyles.title}>{title}</h2>
-            {description && <p id={descriptionId} style={dialogStyles.description}>{description}</p>}
+            <h2 id={titleId} style={{ ...dialogStyles.title, ...styles.title }}>{title}</h2>
+            {description && <p id={descriptionId} style={{ ...dialogStyles.description, ...styles.description }}>{description}</p>}
           </div>
           <Button variant="ghost" size="sm" aria-label={closeLabel} onClick={onClose} style={dialogStyles.closeButton(closeButtonColor)}>×</Button>
         </header>
-        <div style={dialogStyles.body}>{children}</div>
+        <div style={{ ...dialogStyles.body, ...styles.body }}>{children}</div>
       </div>
     </div>
   )
