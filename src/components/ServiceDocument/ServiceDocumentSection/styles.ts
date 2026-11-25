@@ -51,3 +51,6 @@ export const serviceDocumentSectionStyles = {
   },
 
 } as const
+
+export const getSectionHeaderCellStyle = (width?: string, align: 'left' | 'center' | 'right' = 'left'): React.CSSProperties => ({ ...serviceDocumentSectionStyles.table.th, width, textAlign: align })
+export const getSectionCellStyle = (align: 'left' | 'center' | 'right' = 'left'): React.CSSProperties => ({ ...serviceDocumentSectionStyles.table.td, textAlign: align })

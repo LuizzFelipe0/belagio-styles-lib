@@ -1,68 +1,60 @@
-import React, { useState } from 'react'
-import { selectStyles, type SelectSize } from './styles'
-
-// ─── Types ────────────────────────────────────────────────────────────────────
+import React, { forwardRef, useState } from 'react'
+import { getSelectStyle, selectStyles, type SelectSize } from './styles'
 
 export interface SelectOption {
   value: string
   label: string
 }
 
-export interface SelectProps {
+export interface SelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'size' | 'value' | 'defaultValue' | 'onChange'> {
   options: SelectOption[]
   value?: string
   defaultValue?: string
   size?: SelectSize
   label?: string
-  disabled?: boolean
   onChange?: (value: string) => void
-  'aria-label'?: string
+  onChangeEvent?: React.ChangeEventHandler<HTMLSelectElement>
 }
 
-// ─── Component ────────────────────────────────────────────────────────────────
-
-export const Select = ({
+export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select({
   options,
   value,
   defaultValue,
-  size     = 'md',
+  size = 'md',
   label,
   disabled = false,
+  required = false,
   onChange,
-  'aria-label': ariaLabel,
-}: SelectProps) => {
+  onChangeEvent,
+  onFocus,
+  onBlur,
+  onMouseEnter,
+  onMouseLeave,
+  style,
+  ...selectProps
+}, ref) {
   const [hovered, setHovered] = useState(false)
   const [focused, setFocused] = useState(false)
-
-  const computedStyle: React.CSSProperties = {
-    ...selectStyles.base,
-    ...selectStyles.sizes[size],
-    ...(!disabled && hovered && !focused ? selectStyles.states.hovered  : {}),
-    ...(!disabled && focused            ? selectStyles.states.focused  : {}),
-    ...(disabled                        ? selectStyles.states.disabled : {}),
-  }
-
   return (
     <div style={selectStyles.wrapper}>
-      {label && <label style={selectStyles.label}>{label}</label>}
-
+      {label && <label htmlFor={selectProps.id} style={selectStyles.label}>{label}</label>}
       <select
+        {...selectProps}
+        ref={ref}
         value={value}
         defaultValue={defaultValue}
         disabled={disabled}
+        required={required}
         aria-disabled={disabled}
-        aria-label={!label ? ariaLabel : undefined}
-        style={computedStyle}
-        onChange={(e) => onChange?.(e.target.value)}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-        onFocus={() => setFocused(true)}
-        onBlur={() => setFocused(false)}
+        style={getSelectStyle({ size, disabled, hovered, focused, customStyle: style })}
+        onChange={(event) => { onChange?.(event.currentTarget.value); onChangeEvent?.(event) }}
+        onMouseEnter={(event) => { setHovered(true); onMouseEnter?.(event) }}
+        onMouseLeave={(event) => { setHovered(false); onMouseLeave?.(event) }}
+        onFocus={(event) => { setFocused(true); onFocus?.(event) }}
+        onBlur={(event) => { setFocused(false); onBlur?.(event) }}
       >
-        {options.map((opt) => (
-          <option key={opt.value} value={opt.value}>{opt.label}</option>
-        ))}
+        {options.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}
       </select>
     </div>
   )
-}
+})

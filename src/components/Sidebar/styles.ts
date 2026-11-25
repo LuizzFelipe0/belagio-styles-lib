@@ -54,3 +54,12 @@ export const sidebarStyles = {
     fontWeight: tokens.typography.weightBold,
   } satisfies CSSProperties,
 } as const
+
+export const getSidebarRootStyle = (itemCount: number): CSSProperties => ({
+  ...sidebarStyles.root,
+  '--belagio-sidebar-item-count': Math.max(itemCount, 1),
+} as CSSProperties)
+export const getSidebarItemStyle = (active: boolean): CSSProperties => ({
+  ...sidebarStyles.item,
+  ...(active ? sidebarStyles.itemActive : {}),
+})

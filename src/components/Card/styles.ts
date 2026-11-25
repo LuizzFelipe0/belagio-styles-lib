@@ -39,6 +39,10 @@ export const cardStyles = {
   },
 
   states: {
+    clickable: {
+      cursor: 'pointer',
+    } as React.CSSProperties,
+
     hovered: {
       boxShadow: '0 4px 16px rgba(0, 0, 0, 0.12)',
       transform: 'translateY(-1px)',
@@ -106,3 +110,20 @@ export const cardStyles = {
   },
 
 } as const
+
+export const getCardStyle = ({ variant, size, clickable, disabled, hovered, focused }: {
+  variant: CardVariant
+  size: CardSize
+  clickable: boolean
+  disabled: boolean
+  hovered: boolean
+  focused: boolean
+}): React.CSSProperties => ({
+  ...cardStyles.base,
+  ...cardStyles.sizes[size],
+  ...cardStyles.variants[variant],
+  ...(clickable ? cardStyles.states.clickable : {}),
+  ...(clickable && hovered ? cardStyles.states.hovered : {}),
+  ...(focused ? cardStyles.states.focused : {}),
+  ...(disabled ? cardStyles.states.disabled : {}),
+})

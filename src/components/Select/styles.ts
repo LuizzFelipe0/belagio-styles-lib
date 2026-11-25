@@ -1,5 +1,5 @@
 import type React from 'react'
-import { tokens } from '../../tokens'
+import { semanticColors, tokens } from '../../tokens'
 
 export type SelectSize = keyof typeof selectStyles.sizes
 
@@ -24,9 +24,9 @@ export const selectStyles = {
     fontFamily:      tokens.typography.fontFamily,
     fontWeight:      tokens.typography.weightRegular,
     borderRadius:    tokens.spacing.radiusMd,
-    border:          `1px solid ${tokens.colors.border}`,
-    backgroundColor: tokens.colors.surface,
-    color:           tokens.colors.textPrimary,
+    border:          `1px solid ${semanticColors.border}`,
+    backgroundColor: semanticColors.surface,
+    color:           semanticColors.text,
     outline:         'none',
     width:           '100%',
     cursor:          'pointer',
@@ -71,3 +71,18 @@ export const selectStyles = {
   },
 
 } as const
+
+export const getSelectStyle = ({ size, disabled, hovered, focused, customStyle }: {
+  size: SelectSize
+  disabled: boolean
+  hovered: boolean
+  focused: boolean
+  customStyle?: React.CSSProperties
+}): React.CSSProperties => ({
+  ...selectStyles.base,
+  ...selectStyles.sizes[size],
+  ...(!disabled && hovered && !focused ? selectStyles.states.hovered : {}),
+  ...(!disabled && focused ? selectStyles.states.focused : {}),
+  ...(disabled ? selectStyles.states.disabled : {}),
+  ...customStyle,
+})

@@ -36,3 +36,6 @@ export const serviceDocumentMetaRowStyles = {
   } as React.CSSProperties,
 
 } as const
+
+export const getMetaRowStyle = (columnCount: number): React.CSSProperties => ({ ...serviceDocumentMetaRowStyles.root, gridTemplateColumns: `repeat(${columnCount}, 1fr)` })
+export const getMetaBoxStyle = (isLast: boolean): React.CSSProperties => ({ ...serviceDocumentMetaRowStyles.box, ...(isLast ? serviceDocumentMetaRowStyles.boxLast : {}) })

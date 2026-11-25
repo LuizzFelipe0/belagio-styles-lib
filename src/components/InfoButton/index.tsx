@@ -1,5 +1,6 @@
 import React, { useId, useRef, useState } from 'react'
 import { tokens } from '../../tokens'
+import { infoButtonStyles } from './styles'
 
 export interface InfoButtonProps {
   /** Text or content shown above the info button. */
@@ -29,12 +30,7 @@ export const InfoButton = ({
 
   return (
     <span
-      style={{
-        position: 'relative',
-        display: 'inline-flex',
-        verticalAlign: 'middle',
-        lineHeight: 1,
-      }}
+      style={infoButtonStyles.wrapper}
     >
       <button
         ref={buttonRef}
@@ -55,30 +51,7 @@ export const InfoButton = ({
             buttonRef.current?.blur()
           }
         }}
-        style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          width: '18px',
-          height: '18px',
-          minWidth: '18px',
-          padding: 0,
-          border: `1px solid ${tokens.colors.textTertiary}`,
-          borderRadius: '50%',
-          backgroundColor: tokens.colors.background,
-          color: tokens.colors.textSecondary,
-          fontFamily: tokens.typography.fontFamily,
-          fontSize: '12px',
-          fontWeight: tokens.typography.weightBold,
-          fontStyle: 'normal',
-          lineHeight: 1,
-          cursor: 'help',
-          transition: 'color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease',
-          ...(isOpen
-            ? { color: hoverColor, borderColor: hoverColor }
-            : {}),
-          ...style,
-        }}
+        style={infoButtonStyles.button(isOpen, hoverColor, style)}
       >
         i
       </button>
@@ -86,31 +59,7 @@ export const InfoButton = ({
       <span
         id={tooltipId}
         role="tooltip"
-        style={{
-          position: 'absolute',
-          zIndex: 10,
-          left: '50%',
-          bottom: 'calc(100% + 8px)',
-          transform: `translate(-50%, ${isOpen ? '0' : '4px'})`,
-          width: 'max-content',
-          maxWidth: '280px',
-          padding: '8px 10px',
-          border: `1px solid ${tokens.colors.separator}`,
-          borderRadius: tokens.spacing.radiusSm,
-          backgroundColor: tokens.colors.surface,
-          color: tokens.colors.textSecondary,
-          boxShadow: '0 4px 14px rgba(20, 33, 59, 0.12)',
-          fontFamily: tokens.typography.fontFamily,
-          fontSize: tokens.typography.sizeSm,
-          fontWeight: tokens.typography.weightRegular,
-          lineHeight: 1.45,
-          whiteSpace: 'normal',
-          textAlign: 'left',
-          opacity: isOpen ? 1 : 0,
-          visibility: isOpen ? 'visible' : 'hidden',
-          pointerEvents: 'none',
-          transition: 'opacity 0.15s ease, transform 0.15s ease, visibility 0.15s ease',
-        }}
+        style={infoButtonStyles.tooltip(isOpen)}
       >
         {description}
       </span>

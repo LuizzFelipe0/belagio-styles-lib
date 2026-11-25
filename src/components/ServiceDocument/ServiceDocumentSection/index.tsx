@@ -1,4 +1,4 @@
-import { serviceDocumentSectionStyles } from './styles'
+import { getSectionCellStyle, getSectionHeaderCellStyle, serviceDocumentSectionStyles } from './styles'
 import type { ServiceDocumentSection as DocSectionType } from '../types'
 
 export const ServiceDocumentSection = ({ section }: { section: DocSectionType }) => (
@@ -12,7 +12,7 @@ export const ServiceDocumentSection = ({ section }: { section: DocSectionType })
           {section.columns.map((col) => (
             <th
               key={col.key}
-              style={{ ...serviceDocumentSectionStyles.table.th, width: col.width, textAlign: col.align ?? 'left' }}
+              style={getSectionHeaderCellStyle(col.width, col.align)}
             >
               {col.label}
             </th>
@@ -25,7 +25,7 @@ export const ServiceDocumentSection = ({ section }: { section: DocSectionType })
             {section.columns.map((col) => (
               <td
                 key={col.key}
-                style={{ ...serviceDocumentSectionStyles.table.td, textAlign: col.align ?? 'left' }}
+                style={getSectionCellStyle(col.align)}
               >
                 {row.cells[col.key] ?? null}
               </td>

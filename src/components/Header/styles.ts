@@ -55,3 +55,7 @@ export const headerStyles = {
   } as React.CSSProperties,
 
 } as const
+
+export const getHeaderRootStyle = (backgroundColor: string, customStyle?: React.CSSProperties): React.CSSProperties => ({ ...headerStyles.root, backgroundColor, ...customStyle })
+export const getHeaderIconStyle = (customStyle?: React.CSSProperties): React.CSSProperties => ({ ...headerStyles.icon, ...customStyle })
+export const headerSpacerStyle: React.CSSProperties = { flex: 1 }

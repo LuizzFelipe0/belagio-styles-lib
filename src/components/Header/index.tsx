@@ -1,8 +1,11 @@
 import React from 'react'
-import { headerStyles } from './styles'
+import { getHeaderIconStyle, getHeaderRootStyle, headerSpacerStyle, headerStyles } from './styles'
 import { colors } from '../../tokens'
 
 export interface HeaderProps {
+  className?: string
+  style?: React.CSSProperties
+  iconStyle?: React.CSSProperties
   icon?: string
   iconAlt?: string
   title?: string
@@ -12,6 +15,9 @@ export interface HeaderProps {
 }
 
 export const Header = ({
+  className,
+  style,
+  iconStyle,
   icon,
   iconAlt = '',
   title,
@@ -23,12 +29,12 @@ export const Header = ({
   const hasRight = Boolean(locationText || actions)
 
   return (
-    <header style={{ ...headerStyles.root, backgroundColor }}>
+    <header className={className} style={getHeaderRootStyle(backgroundColor, style)}>
 
       {hasLeft && (
         <div style={headerStyles.left}>
           {icon && (
-            <img src={icon} alt={iconAlt} style={headerStyles.icon} />
+            <img src={icon} alt={iconAlt} style={getHeaderIconStyle(iconStyle)} />
           )}
           {title && (
             <span style={headerStyles.title}>{title}</span>
@@ -37,7 +43,7 @@ export const Header = ({
       )}
 
       {/* Spacer — pushes right slot to the edge when left slot is present */}
-      {hasLeft && hasRight && <div style={{ flex: 1 }} />}
+      {hasLeft && hasRight && <div style={headerSpacerStyle} />}
 
       {hasRight && (
         <div style={headerStyles.right}>

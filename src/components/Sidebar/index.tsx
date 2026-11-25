@@ -1,5 +1,5 @@
-import { useRef, type CSSProperties, type KeyboardEvent } from 'react'
-import { sidebarStyles } from './styles'
+import { useRef, type KeyboardEvent } from 'react'
+import { getSidebarItemStyle, getSidebarRootStyle, sidebarStyles } from './styles'
 import type { SidebarProps } from './types'
 
 export type { SidebarBrand, SidebarItem, SidebarProfile, SidebarProps, SidebarStatus } from './types'
@@ -23,7 +23,7 @@ export function Sidebar({
   profile,
   navigationLabel = 'Main navigation',
 }: SidebarProps) {
-  const rootStyle = { ...sidebarStyles.root, '--belagio-sidebar-item-count': Math.max(items.length, 1) } as CSSProperties
+  const rootStyle = getSidebarRootStyle(items.length)
   const itemRefs = useRef(new Map<string, HTMLButtonElement>())
 
   const handleKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
@@ -50,7 +50,7 @@ export function Sidebar({
       <nav className="belagio-sidebar__nav" aria-label={navigationLabel}>
         {items.map((item, index) => {
           const active = item.id === activeItem
-          const itemStyle: CSSProperties = { ...sidebarStyles.item, ...(active ? sidebarStyles.itemActive : {}) }
+          const itemStyle = getSidebarItemStyle(active)
           return <button key={item.id} type="button" className={`belagio-sidebar__item${active ? ' is-active' : ''}`}
             ref={(element) => { if (element) itemRefs.current.set(item.id, element); else itemRefs.current.delete(item.id) }}
             style={itemStyle} disabled={item.disabled}

@@ -1,4 +1,4 @@
-import { footerStyles } from './styles'
+import { footerStyles, getFooterRootStyle, getFooterSlotStyle } from './styles'
 import { colors } from '../../tokens'
 
 export interface FooterProps {
@@ -17,17 +17,17 @@ const SlotLines = ({ lines }: { lines: string[] }) => (
 )
 
 export const Footer = ({ left, center, right, backgroundColor = colors.background }: FooterProps) => (
-  <footer style={{ ...footerStyles.root, backgroundColor }}>
+  <footer style={getFooterRootStyle(backgroundColor)}>
 
-    <div style={footerStyles.slot}>
+    <div style={getFooterSlotStyle('left')}>
       {left?.length && <SlotLines lines={left} />}
     </div>
 
-    <div style={{ ...footerStyles.slot, ...footerStyles.slotCenter }}>
+    <div style={getFooterSlotStyle('center')}>
       {center?.length && <SlotLines lines={center} />}
     </div>
 
-    <div style={{ ...footerStyles.slot, ...footerStyles.slotRight }}>
+    <div style={getFooterSlotStyle('right')}>
       {right?.length && <SlotLines lines={right} />}
     </div>
 

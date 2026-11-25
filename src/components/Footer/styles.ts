@@ -39,3 +39,10 @@ export const footerStyles = {
   } as React.CSSProperties,
 
 } as const
+
+export const getFooterRootStyle = (backgroundColor: string): React.CSSProperties => ({ ...footerStyles.root, backgroundColor })
+export const getFooterSlotStyle = (alignment: 'left' | 'center' | 'right'): React.CSSProperties => ({
+  ...footerStyles.slot,
+  ...(alignment === 'center' ? footerStyles.slotCenter : {}),
+  ...(alignment === 'right' ? footerStyles.slotRight : {}),
+})

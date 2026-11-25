@@ -1,5 +1,5 @@
 import type React from 'react'
-import { tokens } from '../../tokens'
+import { semanticColors, tokens } from '../../tokens'
 
 
 export type ButtonVariant = keyof typeof buttonStyles.variants
@@ -24,24 +24,24 @@ export const buttonStyles = {
 
   variants: {
     primary: {
-      backgroundColor: tokens.colors.blue,
+      backgroundColor: semanticColors.primary,
       color:           tokens.colors.textOnColor,
     } as React.CSSProperties,
 
     danger: {
-      backgroundColor: tokens.colors.red,
+      backgroundColor: semanticColors.error,
       color:           tokens.colors.textOnColor,
     } as React.CSSProperties,
 
     success: {
-      backgroundColor: tokens.colors.green,
+      backgroundColor: semanticColors.success,
       color:           tokens.colors.textOnColor,
     } as React.CSSProperties,
 
     ghost: {
       backgroundColor: 'transparent',
-      color:           tokens.colors.blue,
-      border:          `1px solid ${tokens.colors.blue}`,
+      color:           semanticColors.primary,
+      border:          `1px solid ${semanticColors.primary}`,
     } as React.CSSProperties,
   },
 
@@ -83,3 +83,24 @@ export const buttonStyles = {
   },
 
 } as const
+
+export const getButtonStyle = ({ variant, size, disabled, loading, hovered, focused, customStyle }: {
+  variant: ButtonVariant
+  size: ButtonSize
+  disabled: boolean
+  loading: boolean
+  hovered: boolean
+  focused: boolean
+  customStyle?: React.CSSProperties
+}): React.CSSProperties => {
+  const isInert = disabled || loading
+  return {
+    ...buttonStyles.base,
+    ...buttonStyles.variants[variant],
+    ...buttonStyles.sizes[size],
+    ...(!isInert && hovered ? buttonStyles.states.hovered : {}),
+    ...(focused ? buttonStyles.states.focused : {}),
+    ...(isInert ? buttonStyles.states.disabled : {}),
+    ...customStyle,
+  }
+}

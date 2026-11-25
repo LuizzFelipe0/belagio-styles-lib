@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
 import { AddButton, Button, DeleteButton, UpdateButton } from './index'
-import { colors } from '../../tokens'
+import { semanticColors } from '../../tokens'
 
 describe('Button', () => {
   it('renders its children with the default primary variant and medium size', () => {
@@ -9,7 +9,7 @@ describe('Button', () => {
 
     const button = screen.getByRole('button', { name: 'Salvar' })
     expect(button).toBeEnabled()
-    expect(button).toHaveStyle({ backgroundColor: colors.blue })
+    expect(button).toHaveStyle({ backgroundColor: semanticColors.primary })
     expect(button.style.padding).not.toBe('')
   })
 
@@ -58,9 +58,9 @@ describe('Button', () => {
   })
 
   it.each([
-    ['DeleteButton', DeleteButton, colors.red],
-    ['UpdateButton', UpdateButton, colors.blue],
-    ['AddButton', AddButton, colors.green],
+    ['DeleteButton', DeleteButton, semanticColors.error],
+    ['UpdateButton', UpdateButton, semanticColors.primary],
+    ['AddButton', AddButton, semanticColors.success],
   ])('%s selects its intended variant', (_name, Component, backgroundColor) => {
     render(<Component>Continuar</Component>)
     expect(screen.getByRole('button', { name: 'Continuar' })).toHaveStyle({ backgroundColor })

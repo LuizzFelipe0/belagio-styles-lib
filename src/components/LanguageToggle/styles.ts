@@ -14,8 +14,9 @@ export const languageToggleStyles = {
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'space-between',
+    boxSizing: 'border-box',
     gap: tokens.spacing['3'],
-    minWidth: '15.5rem',
+    minWidth: '155px',
     border: `1px solid ${tokens.colors.border}`,
     borderRadius: tokens.spacing.radiusMd,
     backgroundColor: tokens.colors.surface,
@@ -28,12 +29,12 @@ export const languageToggleStyles = {
 
   sizes: {
     sm: {
-      minHeight: '3.6rem',
+      minHeight: '36px',
       padding: `0 ${tokens.spacing['3']}`,
       fontSize: tokens.typography.sizeSm,
     } as React.CSSProperties,
     md: {
-      minHeight: '4.2rem',
+      minHeight: '42px',
       padding: `0 ${tokens.spacing['4']}`,
       fontSize: tokens.typography.sizeMd,
     } as React.CSSProperties,
@@ -115,3 +116,12 @@ export const languageToggleStyles = {
     cursor: 'not-allowed',
   } as React.CSSProperties,
 } as const
+
+export const getLanguageTriggerStyle = (size: LanguageToggleSize, customStyle: React.CSSProperties | undefined, disabled: boolean): React.CSSProperties => ({
+  ...languageToggleStyles.trigger,
+  ...languageToggleStyles.sizes[size],
+  ...customStyle,
+  ...(disabled ? languageToggleStyles.disabled : {}),
+})
+export const getLanguageChevronStyle = (open: boolean): React.CSSProperties => ({ ...languageToggleStyles.chevron, ...(open ? languageToggleStyles.chevronOpen : {}) })
+export const getLanguageOptionStyle = (selected: boolean): React.CSSProperties => ({ ...languageToggleStyles.option, ...(selected ? languageToggleStyles.optionSelected : {}) })

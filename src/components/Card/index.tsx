@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { cardStyles, type CardVariant, type CardSize } from './styles'
+import { cardStyles, getCardStyle, type CardVariant, type CardSize } from './styles'
 
 
 export interface CardProps {
@@ -55,19 +55,9 @@ export const Card = ({
 
   const isClickable = Boolean(onClick) && !disabled
 
-  const computedStyle: React.CSSProperties = {
-    ...cardStyles.base,
-    ...cardStyles.sizes[size],
-    ...cardStyles.variants[variant],
-    ...(isClickable          ? { cursor: 'pointer' }      : {}),
-    ...(isClickable && hovered ? cardStyles.states.hovered  : {}),
-    ...(focused              ? cardStyles.states.focused  : {}),
-    ...(disabled             ? cardStyles.states.disabled : {}),
-  }
-
   return (
     <div
-      style={computedStyle}
+      style={getCardStyle({ variant, size, clickable: isClickable, disabled, hovered, focused })}
       role={isClickable ? 'button' : undefined}
       tabIndex={isClickable ? 0 : undefined}
       aria-disabled={disabled || undefined}

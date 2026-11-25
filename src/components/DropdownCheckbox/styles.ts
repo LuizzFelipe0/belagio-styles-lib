@@ -139,3 +139,17 @@ export const dropdownCheckboxStyles = {
     cursor: 'inherit',
   } as React.CSSProperties,
 } as const
+
+export type DropdownCheckboxSize = keyof typeof dropdownCheckboxStyles.sizes
+
+export const getDropdownTriggerStyle = (size: DropdownCheckboxSize, disabled: boolean, hovered: boolean, focused: boolean): React.CSSProperties => ({
+  ...dropdownCheckboxStyles.trigger,
+  ...dropdownCheckboxStyles.sizes[size],
+  ...(!disabled && hovered && !focused ? dropdownCheckboxStyles.states.hovered : {}),
+  ...(!disabled && focused ? dropdownCheckboxStyles.states.focused : {}),
+  ...(disabled ? dropdownCheckboxStyles.states.disabled : {}),
+})
+export const getDropdownValueStyle = (empty: boolean): React.CSSProperties => ({ ...dropdownCheckboxStyles.value, ...(empty ? dropdownCheckboxStyles.placeholder : {}) })
+export const getDropdownChevronStyle = (open: boolean): React.CSSProperties => ({ ...dropdownCheckboxStyles.chevron, ...(open ? dropdownCheckboxStyles.chevronOpen : {}) })
+export const getDropdownPanelStyle = (open: boolean): React.CSSProperties => ({ ...dropdownCheckboxStyles.panel, display: open ? 'flex' : 'none' })
+export const getDropdownOptionStyle = (disabled: boolean): React.CSSProperties => ({ ...dropdownCheckboxStyles.option, ...(disabled ? dropdownCheckboxStyles.optionDisabled : {}) })

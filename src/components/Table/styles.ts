@@ -75,3 +75,7 @@ export const tableStyles = {
   } as React.CSSProperties,
 
 } as const
+
+export const getTableHeaderCellStyle = (width?: string, align: 'left' | 'center' | 'right' = 'left'): React.CSSProperties => ({ ...tableStyles.th, width, textAlign: align })
+export const getTableRowStyle = (index: number): React.CSSProperties => ({ ...tableStyles.tr, backgroundColor: index % 2 === 0 ? tokens.colors.background : tokens.colors.backgroundSecondary })
+export const getTableCellStyle = (width?: string, align: 'left' | 'center' | 'right' = 'left'): React.CSSProperties => ({ ...tableStyles.td, textAlign: align, width })

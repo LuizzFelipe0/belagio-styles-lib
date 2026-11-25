@@ -1,5 +1,5 @@
 import { useEffect, useId, useRef, useState, type KeyboardEvent } from 'react'
-import { dropdownCheckboxStyles } from './styles'
+import { dropdownCheckboxStyles, getDropdownChevronStyle, getDropdownOptionStyle, getDropdownPanelStyle, getDropdownTriggerStyle, getDropdownValueStyle, type DropdownCheckboxSize } from './styles'
 
 export interface DropdownCheckboxOption {
   value: string
@@ -7,7 +7,7 @@ export interface DropdownCheckboxOption {
   disabled?: boolean
 }
 
-export type DropdownCheckboxSize = keyof typeof dropdownCheckboxStyles.sizes
+export type { DropdownCheckboxSize } from './styles'
 
 export interface DropdownCheckboxProps {
   options: DropdownCheckboxOption[]
@@ -49,13 +49,7 @@ export const DropdownCheckbox = ({
     .map((option) => option.label)
   const displayValue = selectedLabels.length > 0 ? selectedLabels.join(', ') : placeholder
 
-  const triggerStyle = {
-    ...dropdownCheckboxStyles.trigger,
-    ...dropdownCheckboxStyles.sizes[size],
-    ...(!disabled && hovered && !focused ? dropdownCheckboxStyles.states.hovered : {}),
-    ...(!disabled && focused ? dropdownCheckboxStyles.states.focused : {}),
-    ...(disabled ? dropdownCheckboxStyles.states.disabled : {}),
-  }
+  const triggerStyle = getDropdownTriggerStyle(size, disabled, hovered, focused)
 
   useEffect(() => {
     if (!open) return
@@ -109,19 +103,13 @@ export const DropdownCheckbox = ({
       >
         <span
           id={valueId}
-          style={{
-            ...dropdownCheckboxStyles.value,
-            ...(selectedLabels.length === 0 ? dropdownCheckboxStyles.placeholder : {}),
-          }}
+          style={getDropdownValueStyle(selectedLabels.length === 0)}
         >
           {displayValue}
         </span>
         <span
           aria-hidden="true"
-          style={{
-            ...dropdownCheckboxStyles.chevron,
-            ...(open ? dropdownCheckboxStyles.chevronOpen : {}),
-          }}
+          style={getDropdownChevronStyle(open)}
         />
       </button>
 
@@ -130,18 +118,12 @@ export const DropdownCheckbox = ({
         role="group"
         aria-label={`${label ?? ariaLabel ?? 'Dropdown'} options`}
         hidden={!open}
-        style={{
-          ...dropdownCheckboxStyles.panel,
-          display: open ? 'flex' : 'none',
-        }}
+        style={getDropdownPanelStyle(open)}
       >
         {options.map((option) => (
           <label
             key={option.value}
-            style={{
-              ...dropdownCheckboxStyles.option,
-              ...(option.disabled ? dropdownCheckboxStyles.optionDisabled : {}),
-            }}
+            style={getDropdownOptionStyle(Boolean(option.disabled))}
           >
             <input
               type="checkbox"

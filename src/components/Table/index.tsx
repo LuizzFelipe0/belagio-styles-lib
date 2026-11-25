@@ -1,6 +1,5 @@
 import React from 'react'
-import { tableStyles } from './styles'
-import { tokens } from '../../tokens'
+import { getTableCellStyle, getTableHeaderCellStyle, getTableRowStyle, tableStyles } from './styles'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -57,7 +56,7 @@ export const Table = ({
               {columns.map((col) => (
                 <th
                   key={col.key}
-                  style={{ ...tableStyles.th, width: col.width, textAlign: col.align ?? 'left' }}
+                  style={getTableHeaderCellStyle(col.width, col.align)}
                 >
                   {col.label}
                 </th>
@@ -74,11 +73,11 @@ export const Table = ({
               </tr>
             ) : (
               rows.map((row, index) => (
-                <tr key={row.id} style={{ ...tableStyles.tr, backgroundColor: index % 2 === 0 ? tokens.colors.background : tokens.colors.backgroundSecondary }}>
+                <tr key={row.id} style={getTableRowStyle(index)}>
                   {columns.map((col) => (
                     <td
                       key={col.key}
-                      style={{ ...tableStyles.td, textAlign: col.align ?? 'left', width: col.width }}
+                      style={getTableCellStyle(col.width, col.align)}
                     >
                       {row.cells[col.key] ?? null}
                     </td>

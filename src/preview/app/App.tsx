@@ -14,6 +14,12 @@ import { Footer } from '../../components/Footer'
 import { ServiceDocument } from '../../components/ServiceDocument'
 import { Sidebar } from '../../components/Sidebar'
 import { LanguageToggle, type SiteLanguage } from '../../components/LanguageToggle'
+import { Alert } from '../../components/Alert'
+import { Dialog } from '../../components/Dialog'
+import { EmptyState } from '../../components/EmptyState'
+import { FormField } from '../../components/FormField'
+import { Progress } from '../../components/Progress'
+import { Stepper } from '../../components/Stepper'
 
 injectGlobalStyles()
 
@@ -36,6 +42,8 @@ export default function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [activeSidebarItem, setActiveSidebarItem] = useState('overview')
   const [siteLanguage, setSiteLanguage] = useState<SiteLanguage>('pt-BR')
+  const [dialogOpen, setDialogOpen] = useState(false)
+  const [showWarning, setShowWarning] = useState(true)
 
   return (
     <>
@@ -224,6 +232,30 @@ export default function App() {
                 disabled
               />
             </div>
+          </Group>
+        </Section>
+
+        <Section title="Workflow primitives">
+          <Group label="Form field, callout, progress and steps">
+            <div style={layout.column}>
+              <FormField label="Output folder" description="Choose where recovered files will be saved." required>
+                <Input placeholder="Select a folder" />
+              </FormField>
+              {showWarning && <Alert tone="warning" title="Review the result" onClose={() => setShowWarning(false)}>Some disk areas could not be validated.</Alert>}
+              <Progress label="Scan progress" value={80} max={100} />
+              <Stepper label="Recovery workflow" activeStep={1} steps={[
+                { label: 'Select disk' },
+                { label: 'Choose files' },
+                { label: 'Recover' },
+              ]} />
+              <Button onClick={() => setDialogOpen(true)}>Open dialog</Button>
+              <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} title="Confirm recovery" description="Review your choices before starting.">
+                <Button onClick={() => setDialogOpen(false)}>Continue</Button>
+              </Dialog>
+            </div>
+          </Group>
+          <Group label="Generic empty state">
+            <EmptyState title="No files selected" description="Choose files from the catalog to continue." action={<Button variant="ghost">Browse files</Button>} />
           </Group>
         </Section>
 

@@ -1,5 +1,5 @@
 import { useEffect, useId, useRef, useState, type CSSProperties } from 'react'
-import { languageToggleStyles, type LanguageToggleSize } from './styles'
+import { getLanguageChevronStyle, getLanguageOptionStyle, getLanguageTriggerStyle, languageToggleStyles, type LanguageToggleSize } from './styles'
 import { BrazilFlag, ChinaFlag, FranceFlag, SpainFlag, UnitedStatesFlag } from './flags'
 
 export type SiteLanguage = 'pt-BR' | 'en-US' | 'es-ES' | 'fr-FR' | 'zh-CN'
@@ -7,9 +7,11 @@ export type SiteLanguage = 'pt-BR' | 'en-US' | 'es-ES' | 'fr-FR' | 'zh-CN'
 export interface LanguageToggleProps {
   value?: SiteLanguage
   defaultValue?: SiteLanguage
+  availableLanguages?: SiteLanguage[]
   onChange?: (language: SiteLanguage) => void
   size?: LanguageToggleSize
   disabled?: boolean
+  style?: CSSProperties
   'aria-label'?: string
 }
 
@@ -28,9 +30,11 @@ const languages: {
 export const LanguageToggle = ({
   value,
   defaultValue = 'pt-BR',
+  availableLanguages = languages.map(({ value: language }) => language),
   onChange,
   size = 'md',
   disabled = false,
+  style,
   'aria-label': ariaLabel = 'Idioma do site',
 }: LanguageToggleProps) => {
   const [internalValue, setInternalValue] = useState<SiteLanguage>(defaultValue)
@@ -39,7 +43,8 @@ export const LanguageToggle = ({
   const triggerRef = useRef<HTMLButtonElement>(null)
   const menuId = useId()
   const selectedLanguage = value ?? internalValue
-  const selected = languages.find((language) => language.value === selectedLanguage) ?? languages[0]
+  const selectableLanguages = languages.filter(({ value: language }) => availableLanguages.includes(language))
+  const selected = selectableLanguages.find((language) => language.value === selectedLanguage) ?? selectableLanguages[0] ?? languages[0]
   const SelectedFlag = selected.Flag
 
   useEffect(() => {
@@ -83,11 +88,7 @@ export const LanguageToggle = ({
         aria-controls={menuId}
         disabled={disabled}
         onClick={() => setOpen((isOpen) => !isOpen)}
-        style={{
-          ...languageToggleStyles.trigger,
-          ...languageToggleStyles.sizes[size],
-          ...(disabled ? languageToggleStyles.disabled : {}),
-        }}
+        style={getLanguageTriggerStyle(size, style, disabled)}
       >
         <span style={languageToggleStyles.triggerContent}>
           <SelectedFlag style={languageToggleStyles.flag} />
@@ -95,16 +96,13 @@ export const LanguageToggle = ({
         </span>
         <span
           aria-hidden="true"
-          style={{
-            ...languageToggleStyles.chevron,
-            ...(open ? languageToggleStyles.chevronOpen : {}),
-          }}
+          style={getLanguageChevronStyle(open)}
         />
       </button>
 
       {open && !disabled && (
         <div id={menuId} role="menu" aria-label={ariaLabel} style={languageToggleStyles.menu}>
-          {languages.map(({ value: language, name, Flag }) => (
+          {selectableLanguages.map(({ value: language, name, Flag }) => (
             <button
               key={language}
               type="button"
@@ -112,10 +110,7 @@ export const LanguageToggle = ({
               aria-checked={selectedLanguage === language}
               aria-label={name}
               onClick={() => selectLanguage(language)}
-              style={{
-                ...languageToggleStyles.option,
-                ...(selectedLanguage === language ? languageToggleStyles.optionSelected : {}),
-              }}
+              style={getLanguageOptionStyle(selectedLanguage === language)}
             >
               <Flag style={languageToggleStyles.flag} />
               <span>{language}</span>

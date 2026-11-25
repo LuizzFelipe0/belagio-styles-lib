@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { buttonStyles, type ButtonVariant, type ButtonSize } from './styles'
+import { getButtonStyle, type ButtonVariant, type ButtonSize } from './styles'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 export interface ButtonProps {
+  type?: 'button' | 'submit' | 'reset'
   variant?: ButtonVariant
   size?: ButtonSize
   disabled?: boolean
@@ -11,6 +12,7 @@ export interface ButtonProps {
   children?: React.ReactNode
   onClick?: () => void
   className?: string
+  style?: React.CSSProperties
   'aria-label'?: string
   'aria-controls'?: string
   'aria-expanded'?: boolean
@@ -19,6 +21,7 @@ export interface ButtonProps {
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export const Button = ({
+  type     = 'button',
   variant  = 'primary',
   size     = 'md',
   disabled = false,
@@ -26,6 +29,7 @@ export const Button = ({
   children,
   onClick,
   className,
+  style,
   'aria-label': ariaLabel,
   'aria-controls': ariaControls,
   'aria-expanded': ariaExpanded,
@@ -35,19 +39,10 @@ export const Button = ({
 
   const isInert = disabled || loading
 
-  const computedStyle: React.CSSProperties = {
-    ...buttonStyles.base,
-    ...buttonStyles.variants[variant],
-    ...buttonStyles.sizes[size],
-
-    ...(!isInert && hovered ? buttonStyles.states.hovered  : {}),
-    ...(focused             ? buttonStyles.states.focused  : {}),
-    ...(isInert             ? buttonStyles.states.disabled : {}),
-  }
-
   return (
     <button
-      style={computedStyle}
+      type={type}
+      style={getButtonStyle({ variant, size, disabled, loading, hovered, focused, customStyle: style })}
       className={className}
       disabled={isInert}
       aria-disabled={isInert}
