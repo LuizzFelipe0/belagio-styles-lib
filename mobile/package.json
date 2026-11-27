@@ -1,0 +1,4 @@
+{
+  "main": "../dist/mobile/index.cjs",
+  "types": "../dist/mobile/index.d.ts"
+}

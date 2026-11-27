@@ -22,3 +22,6 @@ jobs:
 
       - name: Run unit tests
         run: npm run test:run
+
+      - name: Build web and mobile packages
+        run: npm run build

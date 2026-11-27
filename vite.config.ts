@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite'
+import { configDefaults } from 'vitest/config'
 import react from '@vitejs/plugin-react'
 import dts from 'vite-plugin-dts'
 import { resolve } from 'path'
@@ -22,13 +23,16 @@ export default defineConfig({
   ...(!isPreview && {
     build: {
       lib: {
-        entry: resolve(__dirname, 'src/index.ts'),
+        entry: {
+          index: resolve(__dirname, 'src/index.ts'),
+          'mobile/index': resolve(__dirname, 'src/mobile/index.ts'),
+        },
         formats: ['es', 'cjs'],
-        fileName: (format) => `index.${format === 'es' ? 'js' : 'cjs'}`,
+        fileName: (format, entryName) => `${entryName}.${format === 'es' ? 'js' : 'cjs'}`,
       },
 
       rollupOptions: {
-        external: ['react', 'react-dom', 'react/jsx-runtime'],
+        external: ['react', 'react-dom', 'react-native', 'react/jsx-runtime'],
 
         output: {
           globals: {
@@ -40,7 +44,7 @@ export default defineConfig({
         },
       },
 
-      emptyOutDir: false,
+      emptyOutDir: true,
     },
   }),
 
@@ -51,6 +55,7 @@ export default defineConfig({
 
   // Vitest
   test: {
+    exclude: [...configDefaults.exclude, 'src/mobile/**'],
     environment: 'jsdom',
     globals: true,
     setupFiles: ['./src/test-setup.ts'],

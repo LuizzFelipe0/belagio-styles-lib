@@ -10,7 +10,7 @@ A reusable React component library written in TypeScript, with design tokens and
 
 - Node.js 20 or later
 - npm
-- React 18 or later and React DOM 18 or later in the consuming project
+- React 18 or later, with React DOM for web apps or React Native 0.77.3 or later for mobile apps. Use the React version required by your app's renderer.
 
 ## Installation
 
@@ -57,6 +57,40 @@ export function ExamplePage() {
 ```
 
 `injectGlobalStyles()` applies the library's reset and base styles and requests the Montserrat font. It safely does nothing when no browser document is available, such as during server-side rendering.
+
+## React Native
+
+Import `Button`, `Input` and `Card` from `belagio-styles-lib/mobile` in iOS and Android apps. The web components remain available at the root import.
+
+```tsx
+import { useState } from 'react'
+import { Button, Card, Input } from 'belagio-styles-lib/mobile'
+
+export function ProfileForm({ save }: { save: (name: string) => Promise<void> }) {
+  const [name, setName] = useState('')
+  const [saving, setSaving] = useState(false)
+
+  async function submit() {
+    setSaving(true)
+    try {
+      await save(name)
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  return (
+    <Card hasHeader title="Profile">
+      <Input label="Name" value={name} onChange={setName} autoComplete="name" />
+      <Button onPress={submit} disabled={!name.trim()} loading={saving}>Save</Button>
+    </Card>
+  )
+}
+```
+
+The mobile button accepts a text label, supports the web variants and sizes, and blocks presses while loading or disabled. The input forwards a native `TextInput` ref and accepts native props such as `keyboardType` and `secureTextEntry`. An actionable card accepts `onPress` and an optional `accessibilityLabel`. Wrap custom card text in React Native's `Text` component.
+
+Mobile components use the system font by default. To use a bundled font or override semantic colors, wrap them in `<MobileThemeProvider fontFamily="Montserrat" colors={{ primary: '#254BB7' }}>` after loading the font in your app. The mobile entry also exports numeric `spacing` and `fontSizes`.
 
 ## Components and utilities
 
@@ -112,6 +146,7 @@ The preview runs at `http://localhost:3000`.
 | `npm run build` | Type-checks the project and builds the library in `dist/`. |
 | `npm run typecheck` | Checks TypeScript types without building. |
 | `npm test` | Runs Vitest in watch mode. |
-| `npm run test:run` | Runs the test suite once. |
+| `npm run test:run` | Runs the web and mobile suites once. |
+| `npm run test:mobile` | Runs the mobile tests with the React Native Jest preset. |
 
-Tests are located alongside components in `src/components/`. GitHub Actions runs the test suite on pushes and pull requests.
+Tests are located in `src/components/` and `src/mobile/`. GitHub Actions runs both suites on pushes and pull requests.
