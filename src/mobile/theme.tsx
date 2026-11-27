@@ -5,6 +5,7 @@ const defaultColors = {
   primary: colors.blue,
   error: colors.red,
   success: colors.green,
+  warning: colors.orange,
   surface: colors.surface,
   border: colors.border,
   text: colors.textPrimary,

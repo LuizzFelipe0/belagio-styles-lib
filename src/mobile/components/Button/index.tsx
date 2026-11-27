@@ -11,6 +11,10 @@ export interface ButtonProps extends Omit<PressableProps, 'children'> {
   loading?: boolean
 }
 
+export const DeleteButton = (props: ButtonProps) => <Button variant="danger" {...props} />
+export const UpdateButton = (props: ButtonProps) => <Button variant="primary" {...props} />
+export const AddButton = (props: ButtonProps) => <Button variant="success" {...props} />
+
 export function Button({
   children, size = 'md', variant = 'primary', disabled, loading = false,
   accessibilityLabel, accessibilityState, style, ...props

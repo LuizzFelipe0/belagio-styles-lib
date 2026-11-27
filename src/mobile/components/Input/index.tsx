@@ -48,3 +48,7 @@ export const Input = forwardRef<TextInput, InputProps>(function Input({
     </View>
   )
 })
+
+export const SearchInput = (props: InputProps) => <Input returnKeyType="search" {...props} />
+export const PasswordInput = (props: InputProps) => <Input secureTextEntry {...props} />
+export const EmailInput = (props: InputProps) => <Input keyboardType="email-address" autoCapitalize="none" autoComplete="email" {...props} />
