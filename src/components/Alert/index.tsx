@@ -22,7 +22,7 @@ export function Alert({ children, title, tone = 'info', role, onClose, closeLabe
         {title && <strong>{title}</strong>}
         <div>{children}</div>
       </div>
-      {onClose && <Button variant="ghost" size="sm" aria-label={closeLabel} onClick={onClose} style={alertStyles.closeButton}>×</Button>}
+      {onClose && <Button variant="ghost" size="sm" aria-label={closeLabel} onClick={onClose} style={alertStyles.closeButton('currentColor')}>×</Button>}
     </div>
   )
 }
