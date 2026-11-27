@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { cardStyles, getCardStyle, type CardVariant, type CardSize } from './styles'
+import type { ComponentSize as CardSize, CardVariant } from '../../../shared/component-types'
+import { cardStyles, getCardStyle } from './styles'
 
 
 export interface CardProps {

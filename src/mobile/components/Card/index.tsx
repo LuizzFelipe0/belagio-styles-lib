@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import { Image, Pressable, Text, View, type ImageSourcePropType, type PressableProps, type ViewProps } from 'react-native'
-import type { CardSize, CardVariant } from '../../components/Card/styles'
-import { useMobileTheme } from '../theme'
+import type { ComponentSize as CardSize, CardVariant } from '../../../shared/component-types'
+import { useMobileTheme } from '../../theme'
 import { styles } from './styles'
 
 export interface CardProps extends ViewProps {

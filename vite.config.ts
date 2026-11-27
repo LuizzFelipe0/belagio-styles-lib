@@ -13,7 +13,7 @@ export default defineConfig({
     ...(!isPreview
       ? [dts({
           include: ['src'],
-          exclude: ['src/preview', '**/*.test.tsx'],
+          exclude: ['src/web/preview', 'src/web/test-setup.ts', '**/*.test.tsx'],
         })]
       : []
     ),
@@ -58,6 +58,6 @@ export default defineConfig({
     exclude: [...configDefaults.exclude, 'src/mobile/**'],
     environment: 'jsdom',
     globals: true,
-    setupFiles: ['./src/test-setup.ts'],
+    setupFiles: ['./src/web/test-setup.ts'],
   },
 })

@@ -1,7 +1,7 @@
 import type React from 'react'
 import { semanticColors, tokens } from '../../tokens'
 
-export type InputSize = keyof typeof inputStyles.sizes
+import type { ComponentSize as InputSize } from '../../../shared/component-types'
 
 export const inputStyles = {
 

@@ -1,18 +1,5 @@
 import { createContext, useContext, useMemo, type ReactNode } from 'react'
-import { colors, spacing as webSpacing, typography } from '../tokens'
-
-// The web reset sets the design baseline to 10 px per rem.
-const fromRem = (value: `${number}rem`): number => Number.parseFloat(value) * 10
-
-export const spacing = Object.fromEntries(
-  Object.entries(webSpacing).map(([name, value]) => [name, fromRem(value)]),
-) as Readonly<Record<keyof typeof webSpacing, number>>
-
-export const fontSizes = {
-  sm: fromRem(typography.sizeSm),
-  md: fromRem(typography.sizeMd),
-  lg: fromRem(typography.sizeLg),
-}
+import { colors } from '../shared/tokens/colors'
 
 const defaultColors = {
   primary: colors.blue,

@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { spacing } from '../theme'
+import { spacing } from '../../tokens'
 
 export const styles = StyleSheet.create({
   base: { alignItems: 'center', justifyContent: 'center', borderRadius: spacing.radiusMd, minHeight: 44 },

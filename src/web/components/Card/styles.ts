@@ -1,8 +1,7 @@
 import type React from 'react'
 import { tokens } from '../../tokens'
 
-export type CardVariant = keyof typeof cardStyles.variants
-export type CardSize    = keyof typeof cardStyles.sizes
+import type { ComponentSize as CardSize, CardVariant } from '../../../shared/component-types'
 
 export const cardStyles = {
 

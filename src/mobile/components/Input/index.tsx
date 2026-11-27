@@ -1,7 +1,8 @@
 import { forwardRef, useState } from 'react'
 import { Text, TextInput, View, type TextInputProps } from 'react-native'
-import type { InputSize } from '../../components/Input/styles'
-import { fontSizes, useMobileTheme } from '../theme'
+import type { ComponentSize as InputSize } from '../../../shared/component-types'
+import { fontSizes } from '../../tokens'
+import { useMobileTheme } from '../../theme'
 import { styles } from './styles'
 
 export interface InputProps extends Omit<TextInputProps, 'onChange'> {

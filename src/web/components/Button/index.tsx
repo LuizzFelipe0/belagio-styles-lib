@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { getButtonStyle, type ButtonVariant, type ButtonSize } from './styles'
+import type { ComponentSize as ButtonSize, ButtonVariant } from '../../../shared/component-types'
+import { getButtonStyle } from './styles'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 

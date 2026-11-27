@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { fontSizes, spacing } from '../theme'
+import { fontSizes, spacing } from '../../tokens'
 
 export const styles = StyleSheet.create({
   base: { borderRadius: spacing.radiusLg },

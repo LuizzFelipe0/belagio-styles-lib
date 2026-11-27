@@ -25,16 +25,3 @@ export const colors = {
 } as const
 
 export type ColorToken = keyof typeof colors
-
-/** Semantic colors can be overridden by setting these CSS custom properties. */
-export const semanticColors = {
-  primary: 'var(--belagio-color-primary, #305CDE)',
-  surface: 'var(--belagio-color-surface, #FFFFFF)',
-  border: 'var(--belagio-color-border, #c7c7c7)',
-  text: 'var(--belagio-color-text, #000000)',
-  success: 'var(--belagio-color-success, #44CC83)',
-  warning: 'var(--belagio-color-warning, #FF9500)',
-  error: 'var(--belagio-color-error, #CF0000)',
-} as const
-
-export type SemanticColorToken = keyof typeof semanticColors

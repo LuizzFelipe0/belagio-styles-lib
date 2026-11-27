@@ -129,6 +129,20 @@ Semantic colors are exported as `semanticColors` and used by the common controls
 
 ## Development
 
+### Source layout
+
+| Directory | Contents |
+| --- | --- |
+| `src/web/components/` | DOM components, colocated styles and component tests. |
+| `src/mobile/components/` | React Native components and colocated styles. |
+| `src/shared/` | Component sizes, variants and design scales used by both platforms. |
+| `src/web/` | Web exports, CSS tokens, global styles and the browser preview. |
+| `src/mobile/` | Mobile exports, numeric tokens, theme provider and mobile integration tests. |
+
+Add each implementation under its platform and export it from that platform's `index.ts`. Both platforms can import from `src/shared/`. Shared modules have no renderer dependencies. The root `src/index.ts` forwards the web API. The top-level `mobile/package.json` lets older Metro resolvers find the built mobile entry.
+
+### Local preview
+
 Install dependencies and start the Vite preview:
 
 ```bash
@@ -149,4 +163,4 @@ The preview runs at `http://localhost:3000`.
 | `npm run test:run` | Runs the web and mobile suites once. |
 | `npm run test:mobile` | Runs the mobile tests with the React Native Jest preset. |
 
-Tests are located in `src/components/` and `src/mobile/`. GitHub Actions runs both suites on pushes and pull requests.
+GitHub Actions runs both suites on pushes and pull requests.

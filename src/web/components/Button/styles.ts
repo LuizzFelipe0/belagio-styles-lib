@@ -2,8 +2,7 @@ import type React from 'react'
 import { semanticColors, tokens } from '../../tokens'
 
 
-export type ButtonVariant = keyof typeof buttonStyles.variants
-export type ButtonSize    = keyof typeof buttonStyles.sizes
+import type { ComponentSize as ButtonSize, ButtonVariant } from '../../../shared/component-types'
 
 export const buttonStyles = {
 

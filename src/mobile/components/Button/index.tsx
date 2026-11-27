@@ -1,6 +1,7 @@
 import { ActivityIndicator, Pressable, Text, type PressableProps } from 'react-native'
-import type { ButtonSize, ButtonVariant } from '../../components/Button/styles'
-import { fontSizes, useMobileTheme } from '../theme'
+import type { ComponentSize as ButtonSize, ButtonVariant } from '../../../shared/component-types'
+import { fontSizes } from '../../tokens'
+import { useMobileTheme } from '../../theme'
 import { styles } from './styles'
 
 export interface ButtonProps extends Omit<PressableProps, 'children'> {

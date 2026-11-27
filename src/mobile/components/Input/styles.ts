@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { spacing } from '../theme'
+import { spacing } from '../../tokens'
 
 export const styles = StyleSheet.create({
   wrapper: { gap: spacing[1] },

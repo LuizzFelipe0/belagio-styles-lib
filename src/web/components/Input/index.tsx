@@ -1,5 +1,6 @@
 import React, { forwardRef, useState } from 'react'
-import { getInputStyle, inputStyles, type InputSize } from './styles'
+import type { ComponentSize as InputSize } from '../../../shared/component-types'
+import { getInputStyle, inputStyles } from './styles'
 
 export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'value' | 'onChange' | 'type'> {
   type?: 'text' | 'password' | 'email' | 'search' | 'number' | 'tel'
