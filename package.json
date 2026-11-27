@@ -19,8 +19,7 @@
     }
   },
   "files": [
-    "dist",
-    "mobile/package.json"
+    "dist"
   ],
   "scripts": {
     "dev": "vite",
