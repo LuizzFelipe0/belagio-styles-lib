@@ -10,7 +10,7 @@ A reusable React component library written in TypeScript, with design tokens and
 
 - Node.js 20 or later
 - npm
-- React 18 or later and React DOM 18 or later in the consuming project
+- React 18 or later, with React DOM for web apps or React Native 0.77.3 or later for mobile apps. Use the React version required by your app's renderer.
 
 ## Installation
 
@@ -58,6 +58,44 @@ export function ExamplePage() {
 
 `injectGlobalStyles()` applies the library's reset and base styles and requests the Montserrat font. It safely does nothing when no browser document is available, such as during server-side rendering.
 
+## React Native
+
+Import components from `belagio-styles-lib/mobile` in iOS and Android apps using a bundler that supports package `exports`, such as Metro from React Native 0.79 onward. All components listed below and the button/input compositions have mobile implementations.
+
+```tsx
+import { useState } from 'react'
+import { Button, Card, Input } from 'belagio-styles-lib/mobile'
+
+export function ProfileForm({ save }: { save: (name: string) => Promise<void> }) {
+  const [name, setName] = useState('')
+  const [saving, setSaving] = useState(false)
+
+  async function submit() {
+    setSaving(true)
+    try {
+      await save(name)
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  return (
+    <Card hasHeader title="Profile">
+      <Input label="Name" value={name} onChange={setName} autoComplete="name" />
+      <Button onPress={submit} disabled={!name.trim()} loading={saving}>Save</Button>
+    </Card>
+  )
+}
+```
+
+The mobile button accepts a text label, supports the web variants and sizes, and blocks presses while loading or disabled. The input forwards a native `TextInput` ref and accepts native props such as `keyboardType` and `secureTextEntry`. An actionable card accepts `onPress` and an optional `accessibilityLabel`. Wrap custom card text in React Native's `Text` component.
+
+Mobile components use the system font by default. To use a bundled font or override semantic colors, wrap them in `<MobileThemeProvider fontFamily="Montserrat" colors={{ primary: '#254BB7' }}>` after loading the font in your app. The mobile entry also exports numeric `spacing` and `fontSizes`.
+
+Mobile callbacks use `onPress` for actions and `onChange` for field values. Use native accessibility props, native image sources for `icon`/`logo`, and native style objects. `Select`, `DropdownCheckbox` and `LanguageToggle` show their choices in a scrollable modal. `Dialog` handles Android back and accessibility escape. `InfoButton` opens its description on touch.
+
+`FormField` accepts string labels, descriptions and errors, assigns the control's accessible name and combines its accessibility hint with the field messages. `Sidebar` renders a scrollable navigation panel for the app to place in its layout. `Table` and `ServiceDocument` support native cell content and horizontal scrolling, with numeric or native dimension values for column widths. `ServiceDocument` displays document content; PDF generation and printing belong to the consuming app.
+
 ## Components and utilities
 
 - **Buttons:** `Button`, `AddButton`, `UpdateButton`, `DeleteButton`, `InfoButton`
@@ -95,6 +133,20 @@ Semantic colors are exported as `semanticColors` and used by the common controls
 
 ## Development
 
+### Source layout
+
+| Directory | Contents |
+| --- | --- |
+| `src/web/components/` | DOM components, colocated styles and component tests. |
+| `src/mobile/components/` | React Native components and colocated styles. |
+| `src/shared/` | Component sizes, variants and design scales used by both platforms. |
+| `src/web/` | Web exports, CSS tokens, global styles and the browser preview. |
+| `src/mobile/` | Mobile exports, numeric tokens, theme provider and mobile integration tests. |
+
+Add each implementation under its platform and export it from that platform's `index.ts`. Both platforms can import from `src/shared/`. Shared modules have no renderer dependencies. The root `src/index.ts` forwards the web API. The package `exports` field defines the public web and mobile entry points.
+
+### Local preview
+
 Install dependencies and start the Vite preview:
 
 ```bash
@@ -112,6 +164,7 @@ The preview runs at `http://localhost:3000`.
 | `npm run build` | Type-checks the project and builds the library in `dist/`. |
 | `npm run typecheck` | Checks TypeScript types without building. |
 | `npm test` | Runs Vitest in watch mode. |
-| `npm run test:run` | Runs the test suite once. |
+| `npm run test:run` | Runs the web and mobile suites once. |
+| `npm run test:mobile` | Runs the mobile tests with the React Native Jest preset. |
 
-Tests are located alongside components in `src/components/`. GitHub Actions runs the test suite on pushes and pull requests.
+GitHub Actions runs both suites on pushes and pull requests.
